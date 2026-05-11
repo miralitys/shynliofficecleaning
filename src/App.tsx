@@ -250,6 +250,20 @@ function getLegalSlug(): LegalSlug | null {
   return slug in legalDocuments ? (slug as LegalSlug) : null
 }
 
+function scrollToHashTarget() {
+  const slug = window.location.hash.replace("#", "")
+  if (!slug) return
+
+  if (slug in legalDocuments) {
+    window.scrollTo({ top: 0, behavior: "auto" })
+    return
+  }
+
+  window.requestAnimationFrame(() => {
+    document.getElementById(slug)?.scrollIntoView({ block: "start" })
+  })
+}
+
 function Logo() {
   return (
     <a href="/#top" className="flex min-h-11 items-center gap-3" aria-label={`${SITE_NAME} home`}>
@@ -305,9 +319,10 @@ function App() {
     const syncLocation = () => {
       setLegalSlug(getLegalSlug())
       setPathname(window.location.pathname)
-      if (window.location.hash.startsWith("#")) window.scrollTo({ top: 0, behavior: "auto" })
+      scrollToHashTarget()
     }
 
+    syncLocation()
     window.addEventListener("hashchange", syncLocation)
     window.addEventListener("popstate", syncLocation)
     return () => {
@@ -347,7 +362,7 @@ function App() {
         <SeoLandingPage page={seoPage} />
       ) : (
         <>
-      <section id="top" className="relative min-h-[744px]">
+      <section id="top" className="relative min-h-[744px] scroll-mt-28">
         <div className="hero-office absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/88 to-white/22" />
         <div className="relative mx-auto grid min-h-[744px] max-w-7xl content-center px-5 sm:px-8">
@@ -377,7 +392,7 @@ function App() {
         </div>
       </section>
 
-      <section id="quote" className="bg-[#f6f9fc] px-5 py-8 sm:px-8">
+      <section id="quote" className="scroll-mt-28 bg-[#f6f9fc] px-5 py-8 sm:px-8">
         <div className="mx-auto max-w-7xl rounded-lg border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-900/12 sm:p-5">
           <div className="grid gap-5">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -412,7 +427,7 @@ function App() {
         </div>
       </section>
 
-      <section id="services" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      <section id="services" className="mx-auto max-w-7xl scroll-mt-28 px-5 py-20 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1fr]">
           <div>
             <p className="text-sm font-black uppercase text-sky-600">Services</p>
@@ -432,7 +447,7 @@ function App() {
         </div>
       </section>
 
-      <section id="industries" className="bg-[#091a2a] px-5 py-20 text-white sm:px-8">
+      <section id="industries" className="scroll-mt-28 bg-[#091a2a] px-5 py-20 text-white sm:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase text-sky-300">Industries</p>
@@ -477,7 +492,7 @@ function App() {
         </div>
       </section>
 
-      <section id="quality" className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1fr]">
+      <section id="quality" className="mx-auto grid max-w-7xl scroll-mt-28 gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1fr]">
         <div>
           <p className="text-sm font-black uppercase text-sky-600">Quality system</p>
           <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Supervision, documentation, and consistency for commercial facilities.</h2>
@@ -498,7 +513,7 @@ function App() {
         </div>
       </section>
 
-      <section id="service-areas" className="border-y border-slate-200 bg-white px-5 py-20 sm:px-8">
+      <section id="service-areas" className="scroll-mt-28 border-y border-slate-200 bg-white px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[0.58fr_1fr] lg:items-start">
             <div>
