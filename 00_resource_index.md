@@ -80,4 +80,3 @@
 - [[../../03_Исполнение/05_deployment_context_2026-05-11]]
 - [[../../99_start_here]]
 - [[../../00_overview]]
-- [[../../../03_Исполнение/32_shiny_site_portfolio_generation_map_2026-05-10]]
