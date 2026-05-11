@@ -29,6 +29,11 @@ const trustSignals = [
 
 const quoteFields = ["Business name", "Facility type", "City / ZIP", "Cleaning frequency", "Contact"]
 
+function cityServiceAreaHref(city: string) {
+  const slug = city.toLowerCase().replace(/\./g, "").replace(/\s+/g, "-")
+  return `/cleaning-services-${slug}-il`
+}
+
 const serviceAreaGroups = [
   {
     label: "A-D",
@@ -532,10 +537,14 @@ function App() {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {group.cities.map((city) => (
-                      <span key={city} className="inline-flex min-h-10 items-center gap-2 rounded-sm bg-[#f6f9fc] px-3 text-sm font-black text-[#091a2a]">
+                      <a
+                        key={city}
+                        href={cityServiceAreaHref(city)}
+                        className="inline-flex min-h-10 items-center gap-2 rounded-sm bg-[#f6f9fc] px-3 text-sm font-black text-[#091a2a] transition hover:bg-sky-50 hover:text-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
+                      >
                         <MapPin className="size-3.5 text-sky-500" />
                         {city}
-                      </span>
+                      </a>
                     ))}
                   </div>
                 </div>

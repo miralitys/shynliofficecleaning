@@ -46,8 +46,8 @@
 - [sitemap.xml](dist/sitemap.xml)
 - [robots.txt](dist/robots.txt)
 - [seo-page-manifest.json](dist/seo-page-manifest.json)
-- [index-D04-F8Fj.css](dist/assets/index-D04-F8Fj.css)
-- [index-B5BXpC3w.js](dist/assets/index-B5BXpC3w.js)
+- [index-3dkl2QWx.css](dist/assets/index-3dkl2QWx.css)
+- [index-C2dyYdrN.js](dist/assets/index-C2dyYdrN.js)
 - generated SEO route directories: `458`
 - total generated HTML pages including home: `459`
 - structured data: `ProfessionalService`, `WebSite`, `WebPage`, `BreadcrumbList`, `Service`, `FAQPage`
