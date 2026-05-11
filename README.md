@@ -6,7 +6,7 @@
 - Status: `created / not launched`
 - Stack: `Vite + React + Tailwind CSS + shadcn`
 - Production domain: `shynliofficecleaning.com`
-- Previous working name: `ShinyOfficeCleaning.com`
+- Brand / site name: `ShynliOfficeCleaning.com`
 - GitHub repo: `https://github.com/miralitys/shynliofficecleaning`
 - Hosting: Render static site created
 - Purpose: separate B2B site prototype for office / commercial cleaning, not a live site and not a `Shynli.com` route.
