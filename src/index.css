@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-background: #f6f9fc;
+  --color-foreground: #091a2a;
+  --color-primary: #091a2a;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #e7f5ff;
+  --color-secondary-foreground: #091a2a;
+  --color-muted: #edf4fa;
+  --color-muted-foreground: #506476;
+  --color-accent: #3bb7ea;
+  --color-accent-foreground: #091a2a;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #d8e4ed;
+  --color-input: #d8e4ed;
+  --color-ring: #3bb7ea;
+  --color-card: #ffffff;
+  --color-card-foreground: #091a2a;
+  --radius: 0.375rem;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f6f9fc;
+  color: #091a2a;
+  font-family: var(--font-sans);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: #bdefff;
+  color: #091a2a;
+}
+
+.hero-office {
+  background-image:
+    linear-gradient(90deg, rgba(246, 249, 252, 0.95), rgba(246, 249, 252, 0.78) 38%, rgba(246, 249, 252, 0.1)),
+    url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400&q=88");
+  background-position: center;
+  background-size: cover;
+}
+
+.industry-image {
+  background-image:
+    linear-gradient(180deg, rgba(9, 26, 42, 0.16), rgba(9, 26, 42, 0.8)),
+    url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=86");
+  background-position: center;
+  background-size: cover;
+}
+
+.operations-photo {
+  background-image:
+    linear-gradient(180deg, rgba(9, 26, 42, 0.08), rgba(9, 26, 42, 0.34)),
+    url("https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=1800&q=86");
+  background-position: center;
+  background-size: cover;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 600ms ease both;
+}
+
+.rise-in-delay {
+  animation: rise-in 720ms ease 100ms both;
+}
+
+.rise-in-late {
+  animation: rise-in 760ms ease 200ms both;
+}
