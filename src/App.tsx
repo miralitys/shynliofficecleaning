@@ -375,7 +375,7 @@ function App() {
             <Badge className="rise-in mb-6 border-sky-200 bg-sky-50 px-3 py-1 text-[#0a6f9f]">
               {SITE_NAME}
             </Badge>
-            <h1 className="rise-in-delay max-w-4xl text-5xl font-black leading-[0.92] tracking-normal sm:text-7xl lg:text-8xl">
+            <h1 className="max-w-4xl text-5xl font-black leading-[0.92] tracking-normal sm:text-7xl lg:text-8xl">
               Commercial cleaning for offices that need to stay ready.
             </h1>
             <p className="rise-in-late mt-7 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">

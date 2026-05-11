@@ -40,14 +40,19 @@
 - [utils.ts](src/lib/utils.ts)
 - [main.tsx](src/main.tsx)
 
+## Public Assets
+
+- [hero-office.webp](public/hero-office.webp) — optimized local hero image for above-the-fold LCP.
+
 ## Build Output
 
 - [index.html](dist/index.html)
 - [sitemap.xml](dist/sitemap.xml)
 - [robots.txt](dist/robots.txt)
 - [seo-page-manifest.json](dist/seo-page-manifest.json)
-- [index-3dkl2QWx.css](dist/assets/index-3dkl2QWx.css)
-- [index-C2dyYdrN.js](dist/assets/index-C2dyYdrN.js)
+- [hero-office.webp](dist/hero-office.webp)
+- [index-DhiSDlqS.css](dist/assets/index-DhiSDlqS.css)
+- [index-Bw8ULDzL.js](dist/assets/index-Bw8ULDzL.js)
 - generated SEO route directories: `458`
 - total generated HTML pages including home: `459`
 - structured data: `ProfessionalService`, `WebSite`, `WebPage`, `BreadcrumbList`, `Service`, `FAQPage`
