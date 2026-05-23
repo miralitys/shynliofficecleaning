@@ -21,7 +21,7 @@ function optimizeStylesheetLinks(html) {
   return html.replace(
     /<link rel="stylesheet" crossorigin href="([^"]+\.css)">/g,
     (_match, href) =>
-      `<link rel="preload" as="style" crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet'">` +
+      `<link rel="preload" as="style" crossorigin href="${href}" onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('css-ready')">` +
       `<noscript><link rel="stylesheet" crossorigin href="${href}"></noscript>`,
   )
 }

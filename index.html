@@ -10,6 +10,15 @@
     />
     <link rel="canonical" href="https://shynliofficecleaning.com/" />
     <link rel="preload" as="image" href="/hero-office.webp" type="image/webp" fetchpriority="high" />
+    <style>
+      html.css-pending:not(.css-ready) body {
+        visibility: hidden;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.add("css-pending")
+      window.setTimeout(() => document.documentElement.classList.add("css-ready"), 3000)
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
