@@ -26,12 +26,22 @@ function optimizeStylesheetLinks(html) {
   )
 }
 
+function preloadEntryModule(html) {
+  const match = html.match(/<script type="module" crossorigin src="([^"]+\.js)"><\/script>/)
+  if (!match) return html
+
+  const href = match[1]
+  if (html.includes(`rel="modulepreload" crossorigin href="${href}"`)) return html
+
+  return html.replace(match[0], `<link rel="modulepreload" crossorigin href="${href}">\n    ${match[0]}`)
+}
+
 const files = await htmlFiles(distDir)
 let optimizedCount = 0
 
 for (const file of files) {
   const html = await fs.readFile(file, "utf8")
-  const optimized = optimizeStylesheetLinks(html)
+  const optimized = preloadEntryModule(optimizeStylesheetLinks(html))
 
   if (optimized !== html) {
     optimizedCount += 1
