@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, MapPin } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import seoData from "./seo-routes.json"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -20,6 +20,24 @@ export type SeoPage =
 const cityServices = seoData.services.filter((service) => service.cityEnabled)
 const cityIndustries = seoData.industries.filter((industry) => industry.cityEnabled)
 const QUOTE_URL = "https://shynlicleaningservice.com/quote"
+
+function StatusDot({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-block size-3.5 shrink-0 rounded-full border-2 border-sky-500 bg-sky-50 ring-2 ring-sky-100 ${className}`}
+    />
+  )
+}
+
+function LinkArrow() {
+  return (
+    <span
+      aria-hidden="true"
+      className="ml-3 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-t-2 border-sky-500"
+    />
+  )
+}
 
 function cityHubRoute(city: City) {
   return `cleaning-services-${city.slug}`
@@ -298,7 +316,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
         <div className="grid gap-4">
           {scope.map((item) => (
             <div key={item} className="grid grid-cols-[1.5rem_1fr] gap-3 border-b border-slate-200 pb-4">
-              <CheckCircle2 className="mt-1 size-5 text-sky-500" />
+              <StatusDot className="mt-1" />
               <p className="leading-7 text-slate-600">{item}</p>
             </div>
           ))}
@@ -332,7 +350,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
             {links.map((link) => (
               <a key={link.href} href={link.href} className="flex min-h-16 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]">
                 <span>{link.label}</span>
-                <ArrowRight className="size-4 text-sky-500" />
+                <LinkArrow />
               </a>
             ))}
           </div>
@@ -345,7 +363,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
           <div className="mt-6 flex flex-wrap gap-2">
             {page.nearby.map((city) => (
               <a key={city.slug} href={`/${cityHubRoute(city)}`} className="inline-flex min-h-10 items-center gap-2 rounded-sm bg-white px-3 text-sm font-black text-[#091a2a]">
-                <MapPin className="size-3.5 text-sky-500" />
+                <StatusDot className="size-2.5 border-[1.5px] ring-2" />
                 {city.name}
               </a>
             ))}

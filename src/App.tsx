@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react"
 import {
   ArrowRight,
-  BadgeCheck,
   Building2,
-  CheckCircle2,
   HeartPulse,
   Landmark,
-  MapPin,
   Phone,
   Sparkles,
   Store,
@@ -267,6 +264,29 @@ function scrollToHashTarget() {
   })
 }
 
+function StatusDot({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-block size-3.5 shrink-0 rounded-full border-2 border-sky-500 bg-sky-50 ring-2 ring-sky-100 ${className}`}
+    />
+  )
+}
+
+function LinkArrow() {
+  return (
+    <span
+      aria-hidden="true"
+      className="ml-3 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-t-2 border-sky-500"
+    />
+  )
+}
+
+function splitIntoColumns<T>(items: T[], columns: number) {
+  const size = Math.ceil(items.length / columns)
+  return Array.from({ length: columns }, (_, index) => items.slice(index * size, index * size + size)).filter((group) => group.length)
+}
+
 function Logo() {
   return (
     <a href="/#top" className="flex min-h-11 items-center gap-3" aria-label={`${SITE_NAME} home`}>
@@ -299,7 +319,7 @@ function LegalPage({ document }: { document: LegalDocument }) {
               <ul className="mt-5 grid gap-4 text-base leading-7 text-slate-600">
                 {section.items.map((item) => (
                   <li key={item} className="grid grid-cols-[1.5rem_1fr] gap-3">
-                    <CheckCircle2 className="mt-1 size-5 shrink-0 text-sky-500" />
+                    <StatusDot className="mt-1" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -320,7 +340,6 @@ function App() {
   const legalDocument = legalSlug ? legalDocuments[legalSlug] : null
   const seoPage = !legalDocument ? findSeoPage(pathname) : null
   const activeIndustryDetails = industries.find((industry) => industry.value === activeIndustry) ?? industries[0]
-  const ActiveIndustryIcon = activeIndustryDetails.icon
 
   useEffect(() => {
     const syncLocation = () => {
@@ -371,7 +390,7 @@ function App() {
       ) : seoPage ? (
         <SeoLandingPage page={seoPage} />
       ) : (
-        <>
+        <div>
       <section id="top" className="relative min-h-[744px] scroll-mt-28">
         <div className="hero-office absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/88 to-white/22" />
@@ -431,7 +450,7 @@ function App() {
                 <p className="text-2xl font-black">{signal.value}</p>
                 <p className="mt-1 text-sm font-semibold text-slate-600">{signal.label}</p>
               </div>
-              <BadgeCheck className="size-7 text-sky-500" />
+              <StatusDot className="size-5 border-[3px]" />
             </div>
           ))}
         </div>
@@ -483,7 +502,7 @@ function App() {
               <div className="grid overflow-hidden rounded-lg bg-white text-[#091a2a] lg:grid-cols-[0.95fr_1.05fr]">
                 <div className="industry-image min-h-[360px] p-8 text-white">
                   <div className="flex h-full flex-col justify-end">
-                    <ActiveIndustryIcon className="mb-5 size-10 text-sky-200" />
+                    <span aria-hidden="true" className="mb-5 block size-10 rounded-full border-[6px] border-sky-200 bg-sky-500/20" />
                     <h3 className="max-w-xl text-4xl font-black leading-tight">{activeIndustryDetails.title}</h3>
                   </div>
                 </div>
@@ -491,10 +510,7 @@ function App() {
                   <p className="max-w-2xl text-lg leading-8 text-slate-600">{activeIndustryDetails.copy}</p>
                   <div className="mt-8 grid gap-3 sm:grid-cols-2">
                     {activeIndustryDetails.checklist.map((item) => (
-                      <div key={item} className="flex items-center gap-3 bg-sky-50 p-4">
-                        <CheckCircle2 className="size-5 shrink-0 text-sky-500" />
-                        <span className="font-black">{item}</span>
-                      </div>
+                      <div key={item} className="border-l-4 border-sky-400 bg-sky-50 p-4 font-black">{item}</div>
                     ))}
                   </div>
                 </div>
@@ -549,7 +565,7 @@ function App() {
                         href={cityServiceAreaHref(city)}
                         className="inline-flex min-h-10 items-center gap-2 rounded-sm bg-[#f6f9fc] px-3 text-sm font-black text-[#091a2a] transition hover:bg-sky-50 hover:text-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
                       >
-                        <MapPin className="size-3.5 text-sky-500" />
+                        <StatusDot className="size-2.5 border-[1.5px] ring-2" />
                         {city}
                       </a>
                     ))}
@@ -586,12 +602,16 @@ function App() {
             ))}
           </div>
         </div>
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {topSeoLinks().map((link) => (
-            <a key={link.href} href={link.href} className="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black">
-              <span>{link.label}</span>
-              <ArrowRight className="size-4 text-sky-500" />
-            </a>
+        <div className="mt-10 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
+          {splitIntoColumns(topSeoLinks(), 4).map((group, index) => (
+            <div key={index} className="grid gap-3">
+              {group.map((link) => (
+                <a key={link.href} href={link.href} className="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black">
+                  <span>{link.label}</span>
+                  <LinkArrow />
+                </a>
+              ))}
+            </div>
           ))}
         </div>
       </section>
@@ -656,7 +676,7 @@ function App() {
           </div>
         </div>
       </section>
-        </>
+        </div>
       )}
 
       <footer className="bg-[#071421] px-5 py-14 text-white sm:px-8">
