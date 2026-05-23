@@ -392,7 +392,15 @@ function App() {
       ) : (
         <div>
       <section id="top" className="relative min-h-[744px] scroll-mt-28">
-        <div className="hero-office absolute inset-0" />
+        <img
+          src="/hero-office.webp"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/88 to-white/22" />
         <div className="relative mx-auto grid min-h-[744px] max-w-7xl content-center px-5 sm:px-8">
           <div className="max-w-4xl">

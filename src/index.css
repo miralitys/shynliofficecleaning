@@ -55,14 +55,6 @@ img {
   color: #091a2a;
 }
 
-.hero-office {
-  background-image:
-    linear-gradient(90deg, rgba(246, 249, 252, 0.95), rgba(246, 249, 252, 0.78) 38%, rgba(246, 249, 252, 0.1)),
-    url("/hero-office.webp");
-  background-position: center;
-  background-size: cover;
-}
-
 .industry-image {
   background-image:
     linear-gradient(180deg, rgba(9, 26, 42, 0.16), rgba(9, 26, 42, 0.8)),
