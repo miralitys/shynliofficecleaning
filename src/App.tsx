@@ -11,11 +11,9 @@ import {
   Sparkles,
   Store,
 } from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SeoLandingPage, findSeoPage, topSeoLinks } from "@/site/seo-pages"
 
 const QUOTE_URL = "https://shynlicleaningservice.com/quote"
@@ -317,17 +315,24 @@ function LegalPage({ document }: { document: LegalDocument }) {
 function App() {
   const [legalSlug, setLegalSlug] = useState<LegalSlug | null>(() => getLegalSlug())
   const [pathname, setPathname] = useState(() => window.location.pathname)
+  const [activeIndustry, setActiveIndustry] = useState(() => industries[0].value)
+  const [openFaqIndex, setOpenFaqIndex] = useState(0)
   const legalDocument = legalSlug ? legalDocuments[legalSlug] : null
   const seoPage = !legalDocument ? findSeoPage(pathname) : null
+  const activeIndustryDetails = industries.find((industry) => industry.value === activeIndustry) ?? industries[0]
+  const ActiveIndustryIcon = activeIndustryDetails.icon
 
   useEffect(() => {
     const syncLocation = () => {
-      setLegalSlug(getLegalSlug())
-      setPathname(window.location.pathname)
-      scrollToHashTarget()
+      const nextLegalSlug = getLegalSlug()
+      const nextPathname = window.location.pathname
+      setLegalSlug((current) => (current === nextLegalSlug ? current : nextLegalSlug))
+      setPathname((current) => (current === nextPathname ? current : nextPathname))
+      if (window.location.hash) {
+        scrollToHashTarget()
+      }
     }
 
-    syncLocation()
     window.addEventListener("hashchange", syncLocation)
     window.addEventListener("popstate", syncLocation)
     return () => {
@@ -458,42 +463,44 @@ function App() {
             <p className="text-sm font-black uppercase text-sky-300">Industries</p>
             <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Cleaning plans for the spaces people notice first.</h2>
           </div>
-          <Tabs defaultValue="offices" className="mt-10">
-            <TabsList className="grid h-auto w-full grid-cols-2 gap-2 bg-white/8 p-2 md:grid-cols-4">
+          <div className="mt-10">
+            <div className="grid h-auto w-full grid-cols-2 gap-2 bg-white/8 p-2 md:grid-cols-4" role="tablist" aria-label="Facility type">
               {industries.map(({ value, label, icon: Icon }) => (
-                <TabsTrigger
+                <button
                   key={value}
-                  value={value}
-                  className="min-h-14 gap-2 text-white data-[state=active]:bg-white data-[state=active]:text-[#091a2a]"
+                  type="button"
+                  role="tab"
+                  aria-selected={activeIndustry === value}
+                  aria-controls="industry-panel"
+                  onClick={() => setActiveIndustry(value)}
+                  className="inline-flex min-h-14 items-center justify-center gap-2 rounded-sm px-3 text-sm font-black text-white transition hover:bg-white/12 aria-selected:bg-white aria-selected:text-[#091a2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
                 >
                   <Icon className="size-4" /> {label}
-                </TabsTrigger>
+                </button>
               ))}
-            </TabsList>
-            {industries.map(({ value, title, copy, checklist, icon: Icon }) => (
-              <TabsContent key={value} value={value} className="mt-6">
-                <div className="grid overflow-hidden rounded-lg bg-white text-[#091a2a] lg:grid-cols-[0.95fr_1.05fr]">
-                  <div className="industry-image min-h-[360px] p-8 text-white">
-                    <div className="flex h-full flex-col justify-end">
-                      <Icon className="mb-5 size-10 text-sky-200" />
-                      <h3 className="max-w-xl text-4xl font-black leading-tight">{title}</h3>
-                    </div>
-                  </div>
-                  <div className="p-7 sm:p-9">
-                    <p className="max-w-2xl text-lg leading-8 text-slate-600">{copy}</p>
-                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                      {checklist.map((item) => (
-                        <div key={item} className="flex items-center gap-3 bg-sky-50 p-4">
-                          <CheckCircle2 className="size-5 shrink-0 text-sky-500" />
-                          <span className="font-black">{item}</span>
-                        </div>
-                      ))}
-                    </div>
+            </div>
+            <div id="industry-panel" role="tabpanel" className="mt-6">
+              <div className="grid overflow-hidden rounded-lg bg-white text-[#091a2a] lg:grid-cols-[0.95fr_1.05fr]">
+                <div className="industry-image min-h-[360px] p-8 text-white">
+                  <div className="flex h-full flex-col justify-end">
+                    <ActiveIndustryIcon className="mb-5 size-10 text-sky-200" />
+                    <h3 className="max-w-xl text-4xl font-black leading-tight">{activeIndustryDetails.title}</h3>
                   </div>
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+                <div className="p-7 sm:p-9">
+                  <p className="max-w-2xl text-lg leading-8 text-slate-600">{activeIndustryDetails.copy}</p>
+                  <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                    {activeIndustryDetails.checklist.map((item) => (
+                      <div key={item} className="flex items-center gap-3 bg-sky-50 p-4">
+                        <CheckCircle2 className="size-5 shrink-0 text-sky-500" />
+                        <span className="font-black">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -612,14 +619,23 @@ function App() {
           <p className="text-sm font-black uppercase text-sky-600">Commercial cleaning FAQ</p>
           <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Answers before you request a walkthrough.</h2>
         </div>
-        <Accordion type="single" collapsible className="w-full">
+        <div className="w-full">
           {faqs.map(([question, answer], index) => (
-            <AccordionItem key={question} value={`item-${index}`}>
-              <AccordionTrigger className="text-left text-lg font-black">{question}</AccordionTrigger>
-              <AccordionContent className="text-base leading-7 text-slate-600">{answer}</AccordionContent>
-            </AccordionItem>
+            <details key={question} className="group border-b border-slate-200 py-5" open={openFaqIndex === index}>
+              <summary
+                className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-lg font-black marker:content-none"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setOpenFaqIndex((current) => (current === index ? -1 : index))
+                }}
+              >
+                <span>{question}</span>
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-sm bg-slate-100 text-base leading-none text-[#091a2a] transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-4 text-base leading-7 text-slate-600">{answer}</p>
+            </details>
           ))}
-        </Accordion>
+        </div>
       </section>
 
       <section className="bg-[#091a2a] px-5 py-16 text-white sm:px-8">
