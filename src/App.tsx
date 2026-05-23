@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react"
-import {
-  ArrowRight,
-  Building2,
-  HeartPulse,
-  Landmark,
-  Phone,
-  Sparkles,
-  Store,
-} from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { SeoLandingPage, findSeoPage, topSeoLinks } from "@/site/seo-pages"
+import { useEffect, useState, type ComponentType } from "react"
 
 const QUOTE_URL = "https://shynlicleaningservice.com/quote"
 const SITE_NAME = "ShynliOfficeCleaning.com"
+type SeoRouteComponent = ComponentType<{ pathname: string }>
 
 const trustSignals = [
   { value: "24h", label: "quote response target" },
@@ -52,7 +40,6 @@ const industries = [
   {
     value: "offices",
     label: "Offices",
-    icon: Building2,
     title: "Office buildings and shared workspaces",
     copy: "Reception areas, conference rooms, kitchens, restrooms, private offices, shared desks, glass, and high-touch surfaces.",
     checklist: ["Nightly or weekly cleaning", "Restroom and breakroom standards", "Trash, floors, dusting, and glass", "Issue reporting after each visit"],
@@ -60,7 +47,6 @@ const industries = [
   {
     value: "medical",
     label: "Medical",
-    icon: HeartPulse,
     title: "Medical and dental offices",
     copy: "Waiting rooms, staff zones, exam rooms, restrooms, and the high-touch areas that make a facility feel safe and maintained.",
     checklist: ["High-touch surface focus", "Waiting room reset", "Staff area cleaning", "Patient-ready presentation"],
@@ -68,7 +54,6 @@ const industries = [
   {
     value: "retail",
     label: "Retail",
-    icon: Store,
     title: "Retail and customer-facing spaces",
     copy: "Storefronts, counters, fitting rooms, glass, public restrooms, back rooms, and floors that need to look ready every morning.",
     checklist: ["Storefront presentation", "Glass and counters", "Customer restroom cleaning", "Opening-ready schedule"],
@@ -76,7 +61,6 @@ const industries = [
   {
     value: "managed",
     label: "Managed",
-    icon: Landmark,
     title: "Common areas and managed properties",
     copy: "Lobbies, stairwells, hallways, elevators, leasing offices, shared restrooms, and building touchpoints.",
     checklist: ["Common area route", "Tenant-facing standards", "Supervisor walkthroughs", "Recurring service plan"],
@@ -114,147 +98,38 @@ const faqs = [
   ["How do we get a quote?", "Request a walkthrough with your facility type, city, preferred frequency, and contact details. The quote is based on the actual scope, not a generic online price."],
 ]
 
-const legalDocuments = {
-  "privacy-policy": {
-    label: "Privacy Policy",
-    updated: "Last Updated: February 16, 2026",
-    intro:
-      `This Privacy Policy explains how SHYNLI LLC handles personal information for ${SITE_NAME}, quote requests, bookings, cleaning services, calls, SMS/text messages, and email communications.`,
-    sections: [
-      {
-        title: "Information we collect",
-        items: [
-          "Contact, service, access, scheduling, billing, and business representative details you provide.",
-          "Website/device data such as IP address, browser type, pages visited, clicks, referring URLs, cookies, pixels, and similar technologies.",
-          "Service delivery records including internal notes, quality-control photos when applicable, and call recordings where permitted after notice.",
-          "Limited data from service providers such as scheduling/CRM tools, payment processors, communications tools, and review platforms.",
-        ],
-      },
-      {
-        title: "How we use information",
-        items: [
-          "To provide quotes, schedule service, coordinate access, complete cleaning work, process payments, prevent fraud, and send service updates.",
-          "To support clients, improve the website and operations, maintain quality standards, train teams, resolve disputes, and keep business records.",
-          "To manage consent, opt-outs, transactional messages, marketing where permitted, and legal compliance.",
-        ],
-      },
-      {
-        title: "Cookies, analytics, advertising, and sharing",
-        items: [
-          "Essential cookies keep the website working; analytics and advertising technologies may measure site performance and ad effectiveness.",
-          "SHYNLI LLC does not sell personal information, but advertising/analytics partners may collect cookie or pixel data that can be considered targeted-advertising sharing under some state laws.",
-          "Information may be shared with vendors such as payment processors, GoHighLevel, Twilio, hosting, analytics, email, insurance, legal, or dispute-resolution providers when needed to operate the business.",
-        ],
-      },
-      {
-        title: "Your choices and contact",
-        items: [
-          "You may request access, correction, deletion, portability, or opt-out where applicable by contacting SHYNLI LLC.",
-          "Marketing SMS opt-out is available by replying STOP; marketing email opt-out is available through unsubscribe links or by contacting info@shynli.com.",
-          "Questions: info@shynli.com | +1 (630) 812-7077 | Legal notices: P.O. Box 2492, Naperville IL 60566.",
-        ],
-      },
-    ],
-  },
-  "terms-of-service": {
-    label: "Terms of Service",
-    updated: "Last Updated: February 16, 2026",
-    intro:
-      "These Terms of Service are the operating agreement for using SHYNLI LLC cleaning services, quote requests, bookings, approvals, invoices, website, and communications.",
-    sections: [
-      {
-        title: "Acceptance, scope, and client responsibilities",
-        items: [
-          "Booking online, approving an estimate, requesting service, clicking Book/Confirm, paying an invoice, or using services constitutes acceptance.",
-          "Services are limited to the confirmed package, checklist, proposal, estimate, invoice, or written scope; extra tasks need approval and may add charges.",
-          "Clients must provide accurate property details, service conditions, special surfaces, pets, access, parking, building rules, working utilities, and a safe work environment.",
-        ],
-      },
-      {
-        title: "Safety, quality, and service limits",
-        items: [
-          "SHYNLI LLC may refuse, suspend, or terminate service for unsafe conditions, biohazards, pests, hostile conduct, weapons, illegal substances, or other prohibited conditions.",
-          "Standard cleaning does not include restoration, hazardous cleanup, biohazard remediation, mold/asbestos/lead work, pest extermination, hauling, heavy furniture moving, or unsafe ladder work unless separately agreed.",
-          "Quality concerns should be reported within 48 hours with photos and details; re-clean, spot correction, credit, or discount may be chosen as the reasonable resolution.",
-        ],
-      },
-      {
-        title: "Payments, cancellations, claims, and liability",
-        items: [
-          "Payment is due upon completion or final invoice unless otherwise agreed; a valid card may be required to reserve the appointment.",
-          "Cancellation/no-show fees may apply: more than 48 hours is $0, 24-48 hours is $50, 12-24 hours is 50%, and less than 12 hours or same-day cancellation is 100% of the booked price.",
-          "Damage or missing-item claims must be reported promptly; missing-item liability is capped as described in the source Terms unless law requires otherwise.",
-          "Liability limits, arbitration, jury-trial waiver, class-action waiver, non-solicitation, force majeure, governing law, and venue provisions apply under the full Terms.",
-        ],
-      },
-      {
-        title: "Legal notices",
-        items: [
-          "Illinois law governs. If arbitration does not apply, disputes are heard in DuPage County, Illinois, or the county where services were performed, to the fullest extent permitted by law.",
-          "Legal notices and arbitration opt-outs: SHYNLI LLC, P.O. Box 2492, Naperville IL 60566.",
-          `Email: info@shynli.com | Phone: +1 (630) 812-7077 | Website: ${SITE_NAME}.`,
-        ],
-      },
-    ],
-  },
-  "cancellation-policy": {
-    label: "Cancellation Policy",
-    updated: "Last Updated: February 13, 2026",
-    intro:
-      "This Cancellation Policy applies to all bookings with SHYNLI LLC. All timing is based on America/Chicago Central Time, and the Terms of Service control if there is any inconsistency.",
-    sections: [
-      {
-        title: "How to cancel or reschedule",
-        items: [
-          "Reply to the confirmation or reminder SMS/text.",
-          "Email info@shynli.com.",
-          "Call or text +1 (630) 812-7077.",
-          "Requests are effective when received; processing may be delayed outside normal operating hours.",
-        ],
-      },
-      {
-        title: "Cancellation and reschedule fees",
-        items: [
-          "More than 48 hours before the appointment: $0.",
-          "24-48 hours before the appointment: $50 flat fee.",
-          "12-24 hours before the appointment: 50% of the booked price.",
-          "Less than 12 hours before the appointment, same-day cancellation, or same-day reschedule: 100% of the booked price.",
-        ],
-      },
-      {
-        title: "No-show, no-access, refunds, and late arrival",
-        items: [
-          "A booking may be treated as a 100% no-show/no-access charge if the team cannot enter because of locked doors, incorrect codes, missing keys, denied building access, unavailable property, guests not checked out, or unreachable contacts.",
-          "If entry cannot be obtained within 15 minutes of arrival because of access issues, the appointment may be treated as a no-show; optional waiting may be billed at $45/hour, prorated, if available.",
-          "If a cancelled/rescheduled slot is successfully rebooked, the cancellation fee is reduced by recovered labor revenue, excluding non-refundable dispatch or processing costs.",
-          "If SHYNLI LLC arrives more than 60 minutes late for reasons within reasonable control and cannot complete the booked scope, SHYNLI LLC may reschedule at no charge or issue a proportional credit for the unperformed portion.",
-        ],
-      },
-      {
-        title: "Unsafe or unsuitable conditions",
-        items: [
-          "If service is refused or terminated because of unsafe conditions, prohibited conditions, or conduct issues, SHYNLI LLC may retain amounts tied to reserved labor time, dispatch/travel, costs incurred, and work performed, subject to refunds required by law.",
-          "Questions: info@shynli.com | +1 (630) 812-7077.",
-        ],
-      },
-    ],
-  },
-} as const
+const homepageSeoLinks = [
+  { label: "Office Cleaning", href: "/office-cleaning-services" },
+  { label: "Commercial Cleaning", href: "/commercial-cleaning-services" },
+  { label: "Janitorial Services", href: "/janitorial-services" },
+  { label: "Medical Office Cleaning", href: "/medical-office-cleaning-services" },
+  { label: "Dental Office Cleaning", href: "/dental-office-cleaning" },
+  { label: "Retail Store Cleaning", href: "/retail-store-cleaning-services" },
+  { label: "Montgomery commercial cleaning", href: "/cleaning-services-montgomery" },
+  { label: "Naperville commercial cleaning", href: "/cleaning-services-naperville" },
+  { label: "North Aurora commercial cleaning", href: "/cleaning-services-north-aurora" },
+  { label: "Oak Brook commercial cleaning", href: "/cleaning-services-oak-brook" },
+  { label: "Oswego commercial cleaning", href: "/cleaning-services-oswego" },
+  { label: "Plainfield commercial cleaning", href: "/cleaning-services-plainfield" },
+  { label: "Romeoville commercial cleaning", href: "/cleaning-services-romeoville" },
+]
 
-type LegalSlug = keyof typeof legalDocuments
-type LegalDocument = (typeof legalDocuments)[LegalSlug]
+type LegalSlug = "privacy-policy" | "terms-of-service" | "cancellation-policy"
+type LegalRouteComponent = ComponentType<{ slug: string }>
+
+const legalSlugs = new Set(["privacy-policy", "terms-of-service", "cancellation-policy"])
 
 function getLegalSlug(): LegalSlug | null {
   const pathSlug = window.location.pathname.replace(/^\/+|\/+$/g, "")
   const slug = pathSlug || window.location.hash.replace("#", "")
-  return slug in legalDocuments ? (slug as LegalSlug) : null
+  return legalSlugs.has(slug) ? (slug as LegalSlug) : null
 }
 
 function scrollToHashTarget() {
   const slug = window.location.hash.replace("#", "")
   if (!slug) return
 
-  if (slug in legalDocuments) {
+  if (legalSlugs.has(slug)) {
     window.scrollTo({ top: 0, behavior: "auto" })
     return
   }
@@ -282,6 +157,14 @@ function LinkArrow() {
   )
 }
 
+function InlineArrow() {
+  return <span aria-hidden="true" className="ml-2 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2" />
+}
+
+function MiniMark({ className = "" }: { className?: string }) {
+  return <span aria-hidden="true" className={`inline-block size-3 rounded-full border-2 border-current ${className}`} />
+}
+
 function splitIntoColumns<T>(items: T[], columns: number) {
   const size = Math.ceil(items.length / columns)
   return Array.from({ length: columns }, (_, index) => items.slice(index * size, index * size + size)).filter((group) => group.length)
@@ -291,44 +174,10 @@ function Logo() {
   return (
     <a href="/#top" className="flex min-h-11 items-center gap-3" aria-label={`${SITE_NAME} home`}>
       <span className="flex size-10 items-center justify-center rounded-sm bg-[#091a2a] text-sky-200">
-        <Sparkles className="size-5" />
+        <span aria-hidden="true" className="block size-4 rotate-45 border-2 border-current" />
       </span>
       <span className="text-lg font-black tracking-normal">Shynli Office Cleaning</span>
     </a>
-  )
-}
-
-function LegalPage({ document }: { document: LegalDocument }) {
-  return (
-    <section className="px-5 py-16 sm:px-8 lg:py-24">
-      <div className="mx-auto max-w-5xl">
-        <a href="#top" className="inline-flex min-h-11 items-center text-sm font-black text-sky-700">
-          Back to {SITE_NAME}
-        </a>
-        <div className="mt-8 border-y border-slate-200 py-10">
-          <p className="text-sm font-black uppercase text-sky-600">Legal</p>
-          <h1 className="mt-3 text-4xl font-black leading-tight sm:text-6xl">{document.label}</h1>
-          <p className="mt-4 text-sm font-black text-slate-500">{document.updated}</p>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">{document.intro}</p>
-        </div>
-
-        <div className="mt-10 grid gap-8">
-          {document.sections.map((section) => (
-            <article key={section.title} className="border-b border-slate-200 pb-8">
-              <h2 className="text-2xl font-black">{section.title}</h2>
-              <ul className="mt-5 grid gap-4 text-base leading-7 text-slate-600">
-                {section.items.map((item) => (
-                  <li key={item} className="grid grid-cols-[1.5rem_1fr] gap-3">
-                    <StatusDot className="mt-1" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
   )
 }
 
@@ -337,8 +186,11 @@ function App() {
   const [pathname, setPathname] = useState(() => window.location.pathname)
   const [activeIndustry, setActiveIndustry] = useState(() => industries[0].value)
   const [openFaqIndex, setOpenFaqIndex] = useState(0)
-  const legalDocument = legalSlug ? legalDocuments[legalSlug] : null
-  const seoPage = !legalDocument ? findSeoPage(pathname) : null
+  const [SeoRoutePage, setSeoRoutePage] = useState<SeoRouteComponent | null>(null)
+  const [LegalRoutePage, setLegalRoutePage] = useState<LegalRouteComponent | null>(null)
+  const isHomePage = pathname === "/" || pathname === ""
+  const shouldRenderLegalPage = Boolean(legalSlug)
+  const shouldRenderSeoPage = !shouldRenderLegalPage && !isHomePage
   const activeIndustryDetails = industries.find((industry) => industry.value === activeIndustry) ?? industries[0]
 
   useEffect(() => {
@@ -361,11 +213,41 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const pageTitle = legalDocument?.label ?? seoPage?.title ?? SITE_NAME
-    const pageDescription = legalDocument?.intro ?? seoPage?.description ?? "Commercial cleaning for offices and business facilities across Chicago suburbs."
-    document.title = pageTitle === SITE_NAME ? pageTitle : `${pageTitle} | ${SITE_NAME}`
+    if (!shouldRenderLegalPage) return
+    let isActive = true
+
+    import("@/site/legal-pages").then((module) => {
+      if (isActive) {
+        setLegalRoutePage(() => module.LegalRoutePage)
+      }
+    })
+
+    return () => {
+      isActive = false
+    }
+  }, [shouldRenderLegalPage])
+
+  useEffect(() => {
+    if (!shouldRenderSeoPage) return
+    let isActive = true
+
+    import("@/site/seo-pages").then((module) => {
+      if (isActive) {
+        setSeoRoutePage(() => module.SeoRoutePage)
+      }
+    })
+
+    return () => {
+      isActive = false
+    }
+  }, [shouldRenderSeoPage])
+
+  useEffect(() => {
+    if (shouldRenderSeoPage || shouldRenderLegalPage) return
+    document.title = SITE_NAME
+    const pageDescription = "Commercial cleaning for offices and business facilities across Chicago suburbs."
     document.querySelector("meta[name='description']")?.setAttribute("content", pageDescription)
-  }, [legalDocument, seoPage])
+  }, [shouldRenderLegalPage, shouldRenderSeoPage])
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f6f9fc] text-[#091a2a]">
@@ -379,16 +261,16 @@ function App() {
             <a href="/#quality" className="inline-flex min-h-11 items-center">Quality</a>
             <a href={QUOTE_URL} className="inline-flex min-h-11 items-center">Quote</a>
           </nav>
-          <Button asChild className="hidden bg-[#091a2a] text-white hover:bg-[#16324d] sm:inline-flex">
-            <a href={QUOTE_URL}>Free walkthrough</a>
-          </Button>
+          <a href={QUOTE_URL} className="hidden min-h-10 items-center rounded-sm bg-[#091a2a] px-4 py-2 text-sm font-black text-white transition hover:bg-[#16324d] sm:inline-flex">
+            Free walkthrough
+          </a>
         </div>
       </header>
 
-      {legalDocument ? (
-        <LegalPage document={legalDocument} />
-      ) : seoPage ? (
-        <SeoLandingPage page={seoPage} />
+      {shouldRenderLegalPage ? (
+        LegalRoutePage && legalSlug ? <LegalRoutePage slug={legalSlug} /> : null
+      ) : shouldRenderSeoPage ? (
+        SeoRoutePage ? <SeoRoutePage pathname={pathname} /> : null
       ) : (
         <div>
       <section id="top" className="relative min-h-[744px] scroll-mt-28">
@@ -404,9 +286,9 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/88 to-white/22" />
         <div className="relative mx-auto grid min-h-[744px] max-w-7xl content-center px-5 sm:px-8">
           <div className="max-w-4xl">
-            <Badge className="rise-in mb-6 border-sky-200 bg-sky-50 px-3 py-1 text-[#0a6f9f]">
+            <span className="rise-in mb-6 inline-flex min-h-7 items-center rounded-sm border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-black text-[#0a6f9f]">
               {SITE_NAME}
-            </Badge>
+            </span>
             <h1 className="max-w-4xl text-5xl font-black leading-[0.92] tracking-normal sm:text-7xl lg:text-8xl">
               Commercial cleaning for offices that need to stay ready.
             </h1>
@@ -414,16 +296,12 @@ function App() {
               Walkthrough-based office cleaning, janitorial service, and facility checklists for Chicago suburbs businesses.
             </p>
             <div className="rise-in-late mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-[#091a2a] text-white hover:bg-[#16324d]">
-                <a href={QUOTE_URL}>
-                  Get a free walkthrough <ArrowRight className="ml-2 size-4" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-slate-300 bg-white/86 text-[#091a2a] hover:bg-white">
-                <a href="tel:+16308127077">
-                  <Phone className="mr-2 size-4" /> Call
-                </a>
-              </Button>
+              <a href={QUOTE_URL} className="inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-6 py-3 text-sm font-black text-white transition hover:bg-[#16324d]">
+                Get a free walkthrough <InlineArrow />
+              </a>
+              <a href="tel:+16308127077" className="inline-flex min-h-11 items-center justify-center rounded-sm border border-slate-300 bg-white/86 px-6 py-3 text-sm font-black text-[#091a2a] transition hover:bg-white">
+                Call
+              </a>
             </div>
           </div>
         </div>
@@ -437,13 +315,13 @@ function App() {
                 <p className="text-sm font-black uppercase text-sky-600">Walkthrough quote</p>
                 <h2 className="mt-1 max-w-2xl text-2xl font-black">Start with the facility, schedule, and cleaning standard you need maintained.</h2>
               </div>
-              <Button asChild className="h-12 bg-sky-500 px-7 font-black text-white hover:bg-sky-600">
-                <a href={QUOTE_URL}>Request quote</a>
-              </Button>
+              <a href={QUOTE_URL} className="inline-flex h-12 items-center justify-center rounded-sm bg-sky-500 px-7 text-sm font-black text-white transition hover:bg-sky-600">
+                Request quote
+              </a>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {quoteFields.map((field) => (
-                <Input key={field} placeholder={field} aria-label={field} className="h-12 min-w-0" />
+                <input key={field} placeholder={field} aria-label={field} className="h-12 min-w-0 rounded-sm border border-slate-300 bg-white px-3 text-sm outline-none transition placeholder:text-slate-500 focus:border-sky-500 focus:ring-2 focus:ring-sky-200" />
               ))}
             </div>
           </div>
@@ -492,17 +370,18 @@ function App() {
           </div>
           <div className="mt-10">
             <div className="grid h-auto w-full grid-cols-2 gap-2 bg-white/8 p-2 md:grid-cols-4" role="tablist" aria-label="Facility type">
-              {industries.map(({ value, label, icon: Icon }) => (
+              {industries.map(({ value, label }) => (
                 <button
                   key={value}
                   type="button"
+                  data-industry-tab={value}
                   role="tab"
                   aria-selected={activeIndustry === value}
                   aria-controls="industry-panel"
                   onClick={() => setActiveIndustry(value)}
                   className="inline-flex min-h-14 items-center justify-center gap-2 rounded-sm px-3 text-sm font-black text-white transition hover:bg-white/12 aria-selected:bg-white aria-selected:text-[#091a2a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
                 >
-                  <Icon className="size-4" /> {label}
+                  <MiniMark /> {label}
                 </button>
               ))}
             </div>
@@ -511,12 +390,12 @@ function App() {
                 <div className="industry-image min-h-[360px] p-8 text-white">
                   <div className="flex h-full flex-col justify-end">
                     <span aria-hidden="true" className="mb-5 block size-10 rounded-full border-[6px] border-sky-200 bg-sky-500/20" />
-                    <h3 className="max-w-xl text-4xl font-black leading-tight">{activeIndustryDetails.title}</h3>
+                    <h3 data-industry-title className="max-w-xl text-4xl font-black leading-tight">{activeIndustryDetails.title}</h3>
                   </div>
                 </div>
                 <div className="p-7 sm:p-9">
-                  <p className="max-w-2xl text-lg leading-8 text-slate-600">{activeIndustryDetails.copy}</p>
-                  <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  <p data-industry-copy className="max-w-2xl text-lg leading-8 text-slate-600">{activeIndustryDetails.copy}</p>
+                  <div data-industry-checklist className="mt-8 grid gap-3 sm:grid-cols-2">
                     {activeIndustryDetails.checklist.map((item) => (
                       <div key={item} className="border-l-4 border-sky-400 bg-sky-50 p-4 font-black">{item}</div>
                     ))}
@@ -611,7 +490,7 @@ function App() {
           </div>
         </div>
         <div className="mt-10 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
-          {splitIntoColumns(topSeoLinks(), 4).map((group, index) => (
+          {splitIntoColumns(homepageSeoLinks, 4).map((group, index) => (
             <div key={index} className="grid gap-3">
               {group.map((link) => (
                 <a key={link.href} href={link.href} className="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black">
@@ -673,14 +552,12 @@ function App() {
             <h2 className="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-6xl">Ready for a cleaner office without managing every detail?</h2>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg" className="bg-sky-300 text-[#091a2a] hover:bg-sky-200">
-              <a href={QUOTE_URL}>
-                Start quote <ArrowRight className="ml-2 size-4" />
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/25 bg-white/8 text-white hover:bg-white/14">
-              <a href="#top">Back to top</a>
-            </Button>
+            <a href={QUOTE_URL} className="inline-flex min-h-11 items-center justify-center rounded-sm bg-sky-300 px-6 py-3 text-sm font-black text-[#091a2a] transition hover:bg-sky-200">
+              Start quote <InlineArrow />
+            </a>
+            <a href="#top" className="inline-flex min-h-11 items-center justify-center rounded-sm border border-white/25 bg-white/8 px-6 py-3 text-sm font-black text-white transition hover:bg-white/14">
+              Back to top
+            </a>
           </div>
         </div>
       </section>
@@ -696,8 +573,8 @@ function App() {
                 Commercial cleaning, office cleaning, and janitorial service for Chicago suburbs businesses that need reliable recurring care.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                <Badge className="bg-white/10 text-white hover:bg-white/10">Walkthrough quotes</Badge>
-                <Badge className="bg-sky-300 text-[#071421] hover:bg-sky-300">Chicago suburbs</Badge>
+                <span className="inline-flex min-h-6 items-center rounded-sm bg-white/10 px-2.5 py-0.5 text-xs font-black text-white">Walkthrough quotes</span>
+                <span className="inline-flex min-h-6 items-center rounded-sm bg-sky-300 px-2.5 py-0.5 text-xs font-black text-[#071421]">Chicago suburbs</span>
               </div>
             </div>
 

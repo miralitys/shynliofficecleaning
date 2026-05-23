@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/generate-seo-pages.mjs && node scripts/optimize-css-loading.mjs",
+    "build": "tsc -b && vite build && node scripts/generate-seo-pages.mjs && node scripts/optimize-css-loading.mjs && node scripts/static-render-homepage.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

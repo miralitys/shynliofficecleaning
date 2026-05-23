@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { ArrowRight } from "lucide-react"
 import seoData from "./seo-routes.json"
 import { Badge } from "@/components/ui/badge"
@@ -144,6 +145,19 @@ export function findSeoPage(pathname: string) {
   const route = pathname.replace(/^\/+|\/+$/g, "")
   if (!route) return null
   return allSeoPages().find((page) => page.route === route) ?? null
+}
+
+export function SeoRoutePage({ pathname }: { pathname: string }) {
+  const page = findSeoPage(pathname)
+
+  useEffect(() => {
+    if (!page) return
+    document.title = `${page.title} | ShynliOfficeCleaning.com`
+    document.querySelector("meta[name='description']")?.setAttribute("content", page.description)
+  }, [page])
+
+  if (!page) return null
+  return <SeoLandingPage page={page} />
 }
 
 export function topSeoLinks() {
