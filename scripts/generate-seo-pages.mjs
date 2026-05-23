@@ -14,6 +14,87 @@ const cityServices = data.services.filter((service) => service.cityEnabled)
 const cityIndustries = data.industries.filter((industry) => industry.cityEnabled)
 const businessId = `${siteUrl}/#business`
 const websiteId = `${siteUrl}/#website`
+const legalDocuments = {
+  "privacy-policy": {
+    updated: "Last Updated: February 16, 2026",
+    sections: [
+      ["Information we collect", [
+        "Contact, service, access, scheduling, billing, and business representative details you provide.",
+        "Website/device data such as IP address, browser type, pages visited, clicks, referring URLs, cookies, pixels, and similar technologies.",
+        "Service delivery records including internal notes, quality-control photos when applicable, and call recordings where permitted after notice.",
+        "Limited data from service providers such as scheduling/CRM tools, payment processors, communications tools, and review platforms.",
+      ]],
+      ["How we use information", [
+        "To provide quotes, schedule service, coordinate access, complete cleaning work, process payments, prevent fraud, and send service updates.",
+        "To support clients, improve the website and operations, maintain quality standards, train teams, resolve disputes, and keep business records.",
+        "To manage consent, opt-outs, transactional messages, marketing where permitted, and legal compliance.",
+      ]],
+      ["Cookies, analytics, advertising, and sharing", [
+        "Essential cookies keep the website working; analytics and advertising technologies may measure site performance and ad effectiveness.",
+        "SHYNLI LLC does not sell personal information, but advertising/analytics partners may collect cookie or pixel data that can be considered targeted-advertising sharing under some state laws.",
+        "Information may be shared with vendors such as payment processors, GoHighLevel, Twilio, hosting, analytics, email, insurance, legal, or dispute-resolution providers when needed to operate the business.",
+      ]],
+      ["Your choices and contact", [
+        "You may request access, correction, deletion, portability, or opt-out where applicable by contacting SHYNLI LLC.",
+        "Marketing SMS opt-out is available by replying STOP; marketing email opt-out is available through unsubscribe links or by contacting info@shynli.com.",
+        "Questions: info@shynli.com | +1 (630) 812-7077 | Legal notices: P.O. Box 2492, Naperville IL 60566.",
+      ]],
+    ],
+  },
+  "terms-of-service": {
+    updated: "Last Updated: February 16, 2026",
+    sections: [
+      ["Acceptance, scope, and client responsibilities", [
+        "Booking online, approving an estimate, requesting service, clicking Book/Confirm, paying an invoice, or using services constitutes acceptance.",
+        "Services are limited to the confirmed package, checklist, proposal, estimate, invoice, or written scope; extra tasks need approval and may add charges.",
+        "Clients must provide accurate property details, service conditions, special surfaces, pets, access, parking, building rules, working utilities, and a safe work environment.",
+      ]],
+      ["Safety, quality, and service limits", [
+        "SHYNLI LLC may refuse, suspend, or terminate service for unsafe conditions, biohazards, pests, hostile conduct, weapons, illegal substances, or other prohibited conditions.",
+        "Standard cleaning does not include restoration, hazardous cleanup, biohazard remediation, mold/asbestos/lead work, pest extermination, hauling, heavy furniture moving, or unsafe ladder work unless separately agreed.",
+        "Quality concerns should be reported within 48 hours with photos and details; re-clean, spot correction, credit, or discount may be chosen as the reasonable resolution.",
+      ]],
+      ["Payments, cancellations, claims, and liability", [
+        "Payment is due upon completion or final invoice unless otherwise agreed; a valid card may be required to reserve the appointment.",
+        "Cancellation/no-show fees may apply: more than 48 hours is $0, 24-48 hours is $50, 12-24 hours is 50%, and less than 12 hours or same-day cancellation is 100% of the booked price.",
+        "Damage or missing-item claims must be reported promptly; missing-item liability is capped as described in the source Terms unless law requires otherwise.",
+        "Liability limits, arbitration, jury-trial waiver, class-action waiver, non-solicitation, force majeure, governing law, and venue provisions apply under the full Terms.",
+      ]],
+      ["Legal notices", [
+        "Illinois law governs. If arbitration does not apply, disputes are heard in DuPage County, Illinois, or the county where services were performed, to the fullest extent permitted by law.",
+        "Legal notices and arbitration opt-outs: SHYNLI LLC, P.O. Box 2492, Naperville IL 60566.",
+        "Email: info@shynli.com | Phone: +1 (630) 812-7077 | Website: ShynliOfficeCleaning.com.",
+      ]],
+    ],
+  },
+  "cancellation-policy": {
+    updated: "Last Updated: February 13, 2026",
+    sections: [
+      ["How to cancel or reschedule", [
+        "Reply to the confirmation or reminder SMS/text.",
+        "Email info@shynli.com.",
+        "Call or text +1 (630) 812-7077.",
+        "Requests are effective when received; processing may be delayed outside normal operating hours.",
+      ]],
+      ["Cancellation and reschedule fees", [
+        "More than 48 hours before the appointment: $0.",
+        "24-48 hours before the appointment: $50 flat fee.",
+        "12-24 hours before the appointment: 50% of the booked price.",
+        "Less than 12 hours before the appointment, same-day cancellation, or same-day reschedule: 100% of the booked price.",
+      ]],
+      ["No-show, no-access, refunds, and late arrival", [
+        "A booking may be treated as a 100% no-show/no-access charge if the team cannot enter because of locked doors, incorrect codes, missing keys, denied building access, unavailable property, guests not checked out, or unreachable contacts.",
+        "If entry cannot be obtained within 15 minutes of arrival because of access issues, the appointment may be treated as a no-show; optional waiting may be billed at $45/hour, prorated, if available.",
+        "If a cancelled/rescheduled slot is successfully rebooked, the cancellation fee is reduced by recovered labor revenue, excluding non-refundable dispatch or processing costs.",
+        "If SHYNLI LLC arrives more than 60 minutes late for reasons within reasonable control and cannot complete the booked scope, SHYNLI LLC may reschedule at no charge or issue a proportional credit for the unperformed portion.",
+      ]],
+      ["Unsafe or unsuitable conditions", [
+        "If service is refused or terminated because of unsafe conditions, prohibited conditions, or conduct issues, SHYNLI LLC may retain amounts tied to reserved labor time, dispatch/travel, costs incurred, and work performed, subject to refunds required by law.",
+        "Questions: info@shynli.com | +1 (630) 812-7077.",
+      ]],
+    ],
+  },
+}
 
 function cityHubRoute(city) {
   return `cleaning-services-${city.slug}`
@@ -275,64 +356,193 @@ function routeSchema(route) {
   }
 }
 
+function staticLogo() {
+  return `<a href="/#top" class="flex min-h-11 items-center gap-3" aria-label="ShynliOfficeCleaning.com home">
+  <span class="flex size-10 items-center justify-center rounded-sm bg-[#091a2a] text-sky-200"><span aria-hidden="true" class="block size-4 rotate-45 border-2 border-current"></span></span>
+  <span class="text-lg font-black tracking-normal">Shynli Office Cleaning</span>
+</a>`
+}
+
+function staticHeader() {
+  return `<header class="sticky top-0 z-30 border-b border-slate-200/70 bg-white/88 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+    ${staticLogo()}
+    <nav class="hidden items-center gap-8 text-sm font-black text-slate-700 lg:flex">
+      <a href="/#services" class="inline-flex min-h-11 items-center">Services</a>
+      <a href="/#industries" class="inline-flex min-h-11 items-center">Industries</a>
+      <a href="/#service-areas" class="inline-flex min-h-11 items-center">Areas</a>
+      <a href="/#quality" class="inline-flex min-h-11 items-center">Quality</a>
+      <a href="${quoteUrl}" class="inline-flex min-h-11 items-center">Quote</a>
+    </nav>
+    <a href="${quoteUrl}" class="hidden min-h-10 items-center rounded-sm bg-[#091a2a] px-4 py-2 text-sm font-black text-white transition hover:bg-[#16324d] sm:inline-flex">Free walkthrough</a>
+  </div>
+</header>`
+}
+
 function staticFooter() {
-  return `<footer>
-  <p>ShynliOfficeCleaning.com</p>
-  <p>Commercial cleaning, office cleaning, and janitorial service for Chicago suburbs businesses that need reliable recurring care.</p>
-  <nav aria-label="Footer services">
-    <h2>Services</h2>
-    <a href="/janitorial-services">Routine janitorial</a>
-    <a href="/office-cleaning-services">Office cleaning</a>
-    <a href="/day-porter-services">Day porter</a>
-    <a href="/floor-care-services">Floor care</a>
-    <a href="/commercial-disinfection-services">Disinfection</a>
-  </nav>
-  <nav aria-label="Footer facilities">
-    <h2>Facilities</h2>
-    <a href="/office-building-cleaning">Offices</a>
-    <a href="/medical-office-cleaning-services">Medical offices</a>
-    <a href="/retail-store-cleaning-services">Retail spaces</a>
-    <a href="/property-management-cleaning">Managed properties</a>
-    <a href="/commercial-cleaning-checklist">Quality control</a>
-    <a href="/service-areas">Service areas</a>
-  </nav>
-  <nav aria-label="Footer legal">
-    <h2>Legal</h2>
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms-of-service">Terms of Service</a>
-    <a href="/cancellation-policy">Cancellation Policy</a>
-    <a href="mailto:info@shynli.com">info@shynli.com</a>
-  </nav>
-  <nav aria-label="Footer contact">
-    <h2>Contact</h2>
-    <a href="tel:+16308127077">(630) 812-7077</a>
-    <a href="${quoteUrl}">Request walkthrough</a>
-    <a href="${quoteUrl}">Quote</a>
-  </nav>
-  <p>Copyright 2026 ShynliOfficeCleaning.com.</p>
+  return `<footer class="bg-[#071421] px-5 py-14 text-white sm:px-8">
+  <div class="mx-auto max-w-7xl">
+    <div class="grid gap-10 border-b border-white/12 pb-10 lg:grid-cols-[1.1fr_0.72fr_0.72fr_0.72fr_0.74fr]">
+      <div>
+        ${staticLogo()}
+        <p class="mt-5 max-w-sm leading-7 text-white/64">Commercial cleaning, office cleaning, and janitorial service for Chicago suburbs businesses that need reliable recurring care.</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="inline-flex min-h-6 items-center rounded-sm bg-white/10 px-2.5 py-0.5 text-xs font-black text-white">Walkthrough quotes</span>
+          <span class="inline-flex min-h-6 items-center rounded-sm bg-sky-300 px-2.5 py-0.5 text-xs font-black text-[#071421]">Chicago suburbs</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-sm font-black uppercase text-sky-300">Services</h3>
+        <ul class="mt-5 space-y-3 text-sm font-semibold text-white/68">
+          <li><a href="/janitorial-services" class="inline-flex min-h-9 items-center">Routine janitorial</a></li>
+          <li><a href="/office-cleaning-services" class="inline-flex min-h-9 items-center">Office cleaning</a></li>
+          <li><a href="/day-porter-services" class="inline-flex min-h-9 items-center">Day porter</a></li>
+          <li><a href="/floor-care-services" class="inline-flex min-h-9 items-center">Floor care</a></li>
+          <li><a href="/commercial-disinfection-services" class="inline-flex min-h-9 items-center">Disinfection</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-black uppercase text-sky-300">Facilities</h3>
+        <ul class="mt-5 space-y-3 text-sm font-semibold text-white/68">
+          <li><a href="/office-building-cleaning" class="inline-flex min-h-9 items-center">Offices</a></li>
+          <li><a href="/medical-office-cleaning-services" class="inline-flex min-h-9 items-center">Medical offices</a></li>
+          <li><a href="/retail-store-cleaning-services" class="inline-flex min-h-9 items-center">Retail spaces</a></li>
+          <li><a href="/property-management-cleaning" class="inline-flex min-h-9 items-center">Managed properties</a></li>
+          <li><a href="/commercial-cleaning-checklist" class="inline-flex min-h-9 items-center">Quality control</a></li>
+          <li><a href="/#service-areas" class="inline-flex min-h-9 items-center">Service areas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-black uppercase text-sky-300">Legal</h3>
+        <ul class="mt-5 space-y-3 text-sm font-semibold text-white/68">
+          <li><a href="/privacy-policy" class="inline-flex min-h-9 items-center">Privacy Policy</a></li>
+          <li><a href="/terms-of-service" class="inline-flex min-h-9 items-center">Terms of Service</a></li>
+          <li><a href="/cancellation-policy" class="inline-flex min-h-9 items-center">Cancellation Policy</a></li>
+          <li><a href="mailto:info@shynli.com" class="inline-flex min-h-9 items-center">info@shynli.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-black uppercase text-sky-300">Contact</h3>
+        <ul class="mt-5 space-y-3 text-sm font-semibold text-white/68">
+          <li><a href="tel:+16308127077" class="inline-flex min-h-9 items-center">(630) 812-7077</a></li>
+          <li>Chicago suburbs</li>
+          <li><a href="${quoteUrl}" class="inline-flex min-h-9 items-center">Request walkthrough</a></li>
+          <li>After-hours schedules</li>
+          <li>Commercial quote required</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4 pt-8 text-sm font-semibold text-white/48 md:flex-row md:items-center md:justify-between">
+      <p>Copyright 2026 ShynliOfficeCleaning.com.</p>
+      <div class="flex flex-wrap gap-5">
+        <a href="/#top" class="inline-flex min-h-9 min-w-9 items-center">Top</a>
+        <a href="${quoteUrl}" class="inline-flex min-h-9 items-center">Quote</a>
+        <a href="/privacy-policy" class="inline-flex min-h-9 items-center">Privacy</a>
+        <span>Commercial walkthrough quotes</span>
+      </div>
+    </div>
+  </div>
 </footer>`
 }
 
+function staticDot() {
+  return `<span aria-hidden="true" class="mt-1 inline-block size-3.5 shrink-0 rounded-full border-2 border-sky-500 bg-sky-50 ring-2 ring-sky-100"></span>`
+}
+
 function staticBody(route) {
+  if (route.kind === "legal") return staticLegalBody(route)
+
   const bullets = route.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")
   const related = data.services
     .slice(0, 6)
-    .map((service) => `<a href="/${service.route}">${escapeHtml(service.name)}</a>`)
+    .map((service) => `<a href="/${service.route}" class="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]"><span>${escapeHtml(service.name)}</span><span aria-hidden="true" class="ml-3 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-t-2 border-sky-500"></span></a>`)
     .join("")
-  return `<main>
-  <p>ShynliOfficeCleaning.com</p>
-  <h1>${escapeHtml(route.title)}</h1>
-  <p>${escapeHtml(route.description)}</p>
-  <h2>Commercial cleaning planned around your facility</h2>
-  <p>Every cleaning plan starts with the building itself: room types, traffic, restrooms, floors, access rules, preferred schedule, and the cleaning standard your team wants maintained.</p>
-  <ul>${bullets}</ul>
-  <h2>What can be included</h2>
-  <p>Service can cover reception areas, private offices, conference rooms, staff kitchens, restrooms, high-touch surfaces, trash removal, glass touch-ups, floor attention, and recurring quality notes.</p>
-  <h2>Related commercial cleaning services</h2>
-  <nav>${related}</nav>
-  <p><a href="${quoteUrl}">Request a commercial cleaning walkthrough quote</a> for Chicago suburbs facilities.</p>
-</main>
-${staticFooter()}`
+  return `<main class="min-h-screen overflow-hidden bg-[#f6f9fc] text-[#091a2a]">
+  ${staticHeader()}
+  <section class="border-b border-slate-200 bg-white px-5 py-16 sm:px-8 lg:py-24">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.76fr_1fr] lg:items-end">
+      <div>
+        <span class="inline-flex min-h-7 items-center rounded-sm border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-black text-[#0a6f9f]">${escapeHtml(route.kind === "city" ? "Local commercial cleaning" : "Walkthrough-first commercial cleaning")}</span>
+        <h1 class="mt-5 max-w-4xl text-4xl font-black leading-tight sm:text-6xl">${escapeHtml(route.title)}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">${escapeHtml(route.description)}</p>
+      </div>
+      <div class="border-l-4 border-sky-300 bg-[#f6f9fc] p-6">
+        <p class="text-sm font-black uppercase text-[#075985]">Walkthrough-first commercial cleaning</p>
+        <p class="mt-3 text-2xl font-black">Get a cleaning plan matched to your rooms, traffic, restrooms, access rules, and schedule.</p>
+        <a href="${quoteUrl}" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-4 py-2 text-sm font-black text-white transition hover:bg-[#16324d]">Request a walkthrough <span aria-hidden="true" class="ml-2 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2"></span></a>
+      </div>
+    </div>
+  </section>
+  <section class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.72fr_1fr]">
+    <div>
+      <p class="text-sm font-black uppercase text-[#075985]">Cleaning plan</p>
+      <h2 class="mt-3 text-3xl font-black leading-tight sm:text-5xl">A better way to keep the facility ready.</h2>
+    </div>
+    <ul class="grid gap-4">${bullets.replaceAll("<li>", `<li class="grid grid-cols-[1.5rem_1fr] gap-3 border-b border-slate-200 pb-4">${staticDot()}<span class="leading-7 text-slate-600">`).replaceAll("</li>", "</span></li>")}</ul>
+  </section>
+  <section class="border-y border-slate-200 bg-white px-5 py-16 sm:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1fr]">
+      <div>
+        <p class="text-sm font-black uppercase text-[#075985]">What can be included</p>
+        <h2 class="mt-3 text-3xl font-black leading-tight sm:text-5xl">Details that make the cleaning feel consistent.</h2>
+        <p class="mt-5 text-lg leading-8 text-slate-600">The exact checklist is finalized after the walkthrough, but these are the kinds of facility needs the service plan can cover.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        ${["Reception areas and entrances", "Private offices and shared workspaces", "Restrooms and break rooms", "Floors, glass, trash, and high-touch points"].map((item) => `<article class="border-t border-slate-300 pt-4"><p class="leading-7 text-slate-600">${item}</p></article>`).join("")}
+      </div>
+    </div>
+  </section>
+  <section class="px-5 py-16 sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <p class="text-sm font-black uppercase text-[#075985]">Explore related cleaning pages</p>
+      <h2 class="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Find the right service, city, or facility type.</h2>
+      <nav class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">${related}</nav>
+    </div>
+  </section>
+  <section class="bg-[#091a2a] px-5 py-16 text-white sm:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.7fr_1fr]">
+      <div>
+        <p class="text-sm font-black uppercase text-sky-300">FAQ</p>
+        <h2 class="mt-3 text-3xl font-black leading-tight sm:text-5xl">Questions this searcher is likely asking.</h2>
+      </div>
+      <div class="grid gap-5">
+        ${routeFaqs(route).map((faq) => `<article class="border-t border-white/15 pt-5"><h3 class="text-xl font-black">${escapeHtml(faq.question)}</h3><p class="mt-3 leading-7 text-white/68">${escapeHtml(faq.answer)}</p></article>`).join("")}
+      </div>
+    </div>
+  </section>
+  ${staticFooter()}
+</main>`
+}
+
+function staticLegalBody(route) {
+  const document = legalDocuments[route.route]
+  const sections = (document?.sections || [])
+    .map(
+      ([title, items]) => `<article class="border-b border-slate-200 pb-8">
+        <h2 class="text-2xl font-black">${escapeHtml(title)}</h2>
+        <ul class="mt-5 grid gap-4 text-base leading-7 text-slate-600">
+          ${items.map((item) => `<li class="grid grid-cols-[1.5rem_1fr] gap-3">${staticDot()}<span>${escapeHtml(item)}</span></li>`).join("")}
+        </ul>
+      </article>`,
+    )
+    .join("")
+
+  return `<main class="min-h-screen overflow-hidden bg-[#f6f9fc] text-[#091a2a]">
+  ${staticHeader()}
+  <section class="px-5 py-16 sm:px-8 lg:py-24">
+    <div class="mx-auto max-w-5xl">
+      <a href="/#top" class="inline-flex min-h-11 items-center text-sm font-black text-sky-700">Back to ShynliOfficeCleaning.com</a>
+      <div class="mt-8 border-y border-slate-200 py-10">
+        <p class="text-sm font-black uppercase text-[#075985]">Legal</p>
+        <h1 class="mt-3 text-4xl font-black leading-tight sm:text-6xl">${escapeHtml(route.title)}</h1>
+        <p class="mt-4 text-sm font-black text-slate-500">${escapeHtml(document?.updated || "")}</p>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-600">${escapeHtml(route.description)}</p>
+      </div>
+      <div class="mt-10 grid gap-8">${sections}</div>
+    </div>
+  </section>
+  ${staticFooter()}
+</main>`
 }
 
 function withMeta(route) {
@@ -340,6 +550,8 @@ function withMeta(route) {
   const schema = jsonLdSafe(routeSchema(route))
   let html = shell
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, "")
+    .replace(/<link rel="modulepreload" crossorigin href="[^"]+">\n\s*/g, "")
+    .replace(/<script type="module" crossorigin src="[^"]+"><\/script>\n\s*/g, "")
     .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(route.title)} | ShynliOfficeCleaning.com</title>`)
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/s, `<meta name="description" content="${escapeHtml(route.description)}">`)
     .replace(/<link rel="canonical" href=".*?"\s*\/?>/, `<link rel="canonical" href="${canonical}">`)
