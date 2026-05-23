@@ -23,6 +23,7 @@
 ## Scripts
 
 - [generate-seo-pages.mjs](scripts/generate-seo-pages.mjs)
+- [optimize-css-loading.mjs](scripts/optimize-css-loading.mjs)
 
 ## Source
 
