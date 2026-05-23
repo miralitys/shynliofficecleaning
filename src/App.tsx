@@ -272,7 +272,7 @@ function App() {
       ) : shouldRenderSeoPage ? (
         SeoRoutePage ? <SeoRoutePage pathname={pathname} /> : null
       ) : (
-        <div>
+        <div className="homepage-content">
       <section id="top" className="relative min-h-[744px] scroll-mt-28">
         <img
           src="/hero-office.webp"

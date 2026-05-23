@@ -71,6 +71,11 @@ img {
   background-size: cover;
 }
 
+.homepage-content > section:not(#top) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
