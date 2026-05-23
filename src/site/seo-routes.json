@@ -81,6 +81,6 @@
     { "name": "Medical Office Cleaning Checklist", "route": "medical-office-cleaning-checklist", "intent": "a checklist for medical office waiting rooms, exam rooms, restrooms, and staff areas" },
     { "name": "Retail Store Cleaning Checklist", "route": "retail-store-cleaning-checklist", "intent": "a checklist for storefronts, fitting rooms, glass, counters, floors, and restrooms" },
     { "name": "Walkthrough Quote Process", "route": "commercial-cleaning-walkthrough", "intent": "what to expect during a commercial cleaning walkthrough and quote" },
-    { "name": "Cleaning Scope Template", "route": "office-cleaning-scope-template", "intent": "how to define a written office cleaning scope before recurring work begins" }
+    { "name": "Cleaning Scope Guide", "route": "office-cleaning-scope-template", "intent": "how to define a clear office cleaning scope before recurring work begins" }
   ]
 }

@@ -358,8 +358,8 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
 
       <section className="px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase text-[#075985]">Explore related cleaning pages</p>
-          <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Find the right service, city, or facility type.</h2>
+          <p className="text-sm font-black uppercase text-[#075985]">Explore related cleaning options</p>
+          <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Choose the right service, city, or facility type.</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {links.map((link) => (
               <a key={link.href} href={link.href} className="flex min-h-16 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]">
@@ -389,7 +389,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.7fr_1fr]">
           <div>
             <p className="text-sm font-black uppercase text-sky-300">FAQ</p>
-            <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">Questions this searcher is likely asking.</h2>
+            <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">Questions businesses usually ask before a walkthrough.</h2>
           </div>
           <div className="grid gap-5">
             {faqItems(page).map(([question, answer]) => (

@@ -494,8 +494,8 @@ function staticBody(route) {
   </section>
   <section class="px-5 py-16 sm:px-8">
     <div class="mx-auto max-w-7xl">
-      <p class="text-sm font-black uppercase text-[#075985]">Explore related cleaning pages</p>
-      <h2 class="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Find the right service, city, or facility type.</h2>
+      <p class="text-sm font-black uppercase text-[#075985]">Explore related cleaning options</p>
+      <h2 class="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Choose the right service, city, or facility type.</h2>
       <nav class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">${related}</nav>
     </div>
   </section>
@@ -503,7 +503,7 @@ function staticBody(route) {
     <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.7fr_1fr]">
       <div>
         <p class="text-sm font-black uppercase text-sky-300">FAQ</p>
-        <h2 class="mt-3 text-3xl font-black leading-tight sm:text-5xl">Questions this searcher is likely asking.</h2>
+        <h2 class="mt-3 text-3xl font-black leading-tight sm:text-5xl">Questions businesses usually ask before a walkthrough.</h2>
       </div>
       <div class="grid gap-5">
         ${routeFaqs(route).map((faq) => `<article class="border-t border-white/15 pt-5"><h3 class="text-xl font-black">${escapeHtml(faq.question)}</h3><p class="mt-3 leading-7 text-white/68">${escapeHtml(faq.answer)}</p></article>`).join("")}
