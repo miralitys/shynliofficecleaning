@@ -105,13 +105,13 @@ const homepageSeoLinks = [
   { label: "Medical Office Cleaning", href: "/medical-office-cleaning-services" },
   { label: "Dental Office Cleaning", href: "/dental-office-cleaning" },
   { label: "Retail Store Cleaning", href: "/retail-store-cleaning-services" },
-  { label: "Montgomery commercial cleaning", href: "/cleaning-services-montgomery" },
-  { label: "Naperville commercial cleaning", href: "/cleaning-services-naperville" },
-  { label: "North Aurora commercial cleaning", href: "/cleaning-services-north-aurora" },
-  { label: "Oak Brook commercial cleaning", href: "/cleaning-services-oak-brook" },
-  { label: "Oswego commercial cleaning", href: "/cleaning-services-oswego" },
-  { label: "Plainfield commercial cleaning", href: "/cleaning-services-plainfield" },
-  { label: "Romeoville commercial cleaning", href: "/cleaning-services-romeoville" },
+  { label: "Montgomery commercial cleaning", href: "/cleaning-services-montgomery-il" },
+  { label: "Naperville commercial cleaning", href: "/cleaning-services-naperville-il" },
+  { label: "North Aurora commercial cleaning", href: "/cleaning-services-north-aurora-il" },
+  { label: "Oak Brook commercial cleaning", href: "/cleaning-services-oak-brook-il" },
+  { label: "Oswego commercial cleaning", href: "/cleaning-services-oswego-il" },
+  { label: "Plainfield commercial cleaning", href: "/cleaning-services-plainfield-il" },
+  { label: "Romeoville commercial cleaning", href: "/cleaning-services-romeoville-il" },
 ]
 
 type LegalSlug = "privacy-policy" | "terms-of-service" | "cancellation-policy"
