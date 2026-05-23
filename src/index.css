@@ -71,7 +71,7 @@ img {
   background-size: cover;
 }
 
-.homepage-content > section:not(#top) {
+.homepage-content > section:not(#top):not(.final-cta) {
   content-visibility: auto;
   contain-intrinsic-size: auto 720px;
 }

@@ -312,10 +312,10 @@ function App() {
           <div className="grid gap-5">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <p className="text-sm font-black uppercase text-sky-600">Walkthrough quote</p>
+                <p className="text-sm font-black uppercase text-[#075985]">Walkthrough quote</p>
                 <h2 className="mt-1 max-w-2xl text-2xl font-black">Start with the facility, schedule, and cleaning standard you need maintained.</h2>
               </div>
-              <a href={QUOTE_URL} className="inline-flex h-12 items-center justify-center rounded-sm bg-sky-500 px-7 text-sm font-black text-white transition hover:bg-sky-600">
+              <a href={QUOTE_URL} className="inline-flex h-12 items-center justify-center rounded-sm bg-[#075985] px-7 text-sm font-black text-white transition hover:bg-[#0369a1]">
                 Request quote
               </a>
             </div>
@@ -345,7 +345,7 @@ function App() {
       <section id="services" className="mx-auto max-w-7xl scroll-mt-28 px-5 py-20 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1fr]">
           <div>
-            <p className="text-sm font-black uppercase text-sky-600">Services</p>
+            <p className="text-sm font-black uppercase text-[#075985]">Services</p>
             <h2 className="mt-3 max-w-xl text-4xl font-black leading-tight sm:text-5xl">Commercial cleaning services built around your building.</h2>
             <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
               Choose the cleaning program that matches your rooms, traffic, hours, restrooms, floors, and level of daily visibility.
@@ -409,7 +409,7 @@ function App() {
 
       <section id="quality" className="mx-auto grid max-w-7xl scroll-mt-28 gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1fr]">
         <div>
-          <p className="text-sm font-black uppercase text-sky-600">Quality system</p>
+          <p className="text-sm font-black uppercase text-[#075985]">Quality system</p>
           <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Supervision, documentation, and consistency for commercial facilities.</h2>
           <p className="mt-6 text-lg leading-8 text-slate-600">
             Your team should not have to chase the same cleaning issues every week. The plan is documented, checked, and adjusted when the facility changes.
@@ -432,7 +432,7 @@ function App() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[0.58fr_1fr] lg:items-start">
             <div>
-              <p className="text-sm font-black uppercase text-sky-600">Service areas</p>
+              <p className="text-sm font-black uppercase text-[#075985]">Service areas</p>
               <h2 className="mt-3 max-w-xl text-4xl font-black leading-tight sm:text-5xl">Commercial cleaning coverage across Chicago suburbs.</h2>
               <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
                 Request office cleaning, janitorial service, and commercial cleaning walkthroughs across the current Chicago suburbs service area.
@@ -467,7 +467,7 @@ function App() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.65fr_1fr]">
           <div>
-            <p className="text-sm font-black uppercase text-sky-600">Find service by location</p>
+            <p className="text-sm font-black uppercase text-[#075985]">Find service by location</p>
             <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Explore office cleaning coverage by service and city.</h2>
             <p className="mt-5 text-lg leading-8 text-slate-600">
               Browse commercial cleaning by facility type, service need, and nearby Chicago suburbs location.
@@ -507,7 +507,7 @@ function App() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.95fr]">
           <div className="operations-photo min-h-[520px] rounded-lg" />
           <div className="flex flex-col justify-center">
-            <p className="text-sm font-black uppercase text-sky-600">Why businesses choose us</p>
+            <p className="text-sm font-black uppercase text-[#075985]">Why businesses choose us</p>
             <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">A cleaning plan that is easier to manage.</h2>
             <div className="mt-8 grid gap-4">
               {clientBenefits.map(([name, idea]) => (
@@ -523,7 +523,7 @@ function App() {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.78fr_1fr]">
         <div>
-          <p className="text-sm font-black uppercase text-sky-600">Commercial cleaning FAQ</p>
+          <p className="text-sm font-black uppercase text-[#075985]">Commercial cleaning FAQ</p>
           <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Answers before you request a walkthrough.</h2>
         </div>
         <div className="w-full">
@@ -545,7 +545,7 @@ function App() {
         </div>
       </section>
 
-      <section className="bg-[#091a2a] px-5 py-16 text-white sm:px-8">
+      <section className="final-cta bg-[#091a2a] px-5 py-16 text-white sm:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm font-black uppercase text-sky-300">Free walkthrough quote</p>

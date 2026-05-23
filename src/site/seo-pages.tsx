@@ -313,7 +313,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">{page.description}</p>
           </div>
           <div className="border-l-4 border-sky-300 bg-[#f6f9fc] p-6">
-            <p className="text-sm font-black uppercase text-sky-600">Walkthrough-first commercial cleaning</p>
+            <p className="text-sm font-black uppercase text-[#075985]">Walkthrough-first commercial cleaning</p>
             <p className="mt-3 text-2xl font-black">Get a cleaning plan matched to your rooms, traffic, restrooms, access rules, and schedule.</p>
             <Button asChild className="mt-6 bg-[#091a2a] text-white hover:bg-[#16324d]">
               <a href={QUOTE_URL}>Request a walkthrough <ArrowRight className="ml-2 size-4" /></a>
@@ -324,7 +324,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.72fr_1fr]">
         <div>
-          <p className="text-sm font-black uppercase text-sky-600">Cleaning plan</p>
+          <p className="text-sm font-black uppercase text-[#075985]">Cleaning plan</p>
           <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">A better way to keep the facility ready.</h2>
         </div>
         <div className="grid gap-4">
@@ -340,7 +340,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
       <section className="border-y border-slate-200 bg-white px-5 py-16 sm:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1fr]">
           <div>
-            <p className="text-sm font-black uppercase text-sky-600">What can be included</p>
+            <p className="text-sm font-black uppercase text-[#075985]">What can be included</p>
             <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">Details that make the cleaning feel consistent.</h2>
             <p className="mt-5 text-lg leading-8 text-slate-600">
               The exact checklist is finalized after the walkthrough, but these are the kinds of facility needs the service plan can cover.
@@ -358,7 +358,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
 
       <section className="px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase text-sky-600">Explore related cleaning pages</p>
+          <p className="text-sm font-black uppercase text-[#075985]">Explore related cleaning pages</p>
           <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Find the right service, city, or facility type.</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {links.map((link) => (
@@ -373,7 +373,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
 
       {"nearby" in page ? (
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-          <p className="text-sm font-black uppercase text-sky-600">Nearby commercial cleaning coverage</p>
+          <p className="text-sm font-black uppercase text-[#075985]">Nearby commercial cleaning coverage</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {page.nearby.map((city) => (
               <a key={city.slug} href={`/${cityHubRoute(city)}`} className="inline-flex min-h-10 items-center gap-2 rounded-sm bg-white px-3 text-sm font-black text-[#091a2a]">

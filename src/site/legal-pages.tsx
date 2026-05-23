@@ -149,7 +149,7 @@ function LegalPage({ document }: { document: LegalDocument }) {
           Back to {SITE_NAME}
         </a>
         <div className="mt-8 border-y border-slate-200 py-10">
-          <p className="text-sm font-black uppercase text-sky-600">Legal</p>
+          <p className="text-sm font-black uppercase text-[#075985]">Legal</p>
           <h1 className="mt-3 text-4xl font-black leading-tight sm:text-6xl">{document.label}</h1>
           <p className="mt-4 text-sm font-black text-slate-500">{document.updated}</p>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">{document.intro}</p>
