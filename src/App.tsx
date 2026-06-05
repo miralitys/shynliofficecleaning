@@ -102,6 +102,7 @@ const homepageSeoLinks = [
   { label: "Office Cleaning", href: "/office-cleaning-services" },
   { label: "Commercial Cleaning", href: "/commercial-cleaning-services" },
   { label: "Janitorial Services", href: "/janitorial-services" },
+  { label: "Commercial cleaning guides", href: "/commercial-cleaning-guides" },
   { label: "Medical Office Cleaning", href: "/medical-office-cleaning-services" },
   { label: "Dental Office Cleaning", href: "/dental-office-cleaning" },
   { label: "Retail Store Cleaning", href: "/retail-store-cleaning-services" },
@@ -112,6 +113,34 @@ const homepageSeoLinks = [
   { label: "Oswego commercial cleaning", href: "/cleaning-services-oswego-il" },
   { label: "Plainfield commercial cleaning", href: "/cleaning-services-plainfield-il" },
   { label: "Romeoville commercial cleaning", href: "/cleaning-services-romeoville-il" },
+]
+
+const homepageGuideLinks = [
+  {
+    title: "How to Choose an Office Cleaning Company",
+    href: "/how-to-choose-office-cleaning-company",
+    copy: "Questions to ask before a walkthrough, from insurance and scope clarity to quality follow-up.",
+  },
+  {
+    title: "Commercial Office Cleaning Scope of Work Checklist",
+    href: "/commercial-cleaning-scope-of-work-checklist",
+    copy: "What should be written down before recurring office cleaning starts.",
+  },
+  {
+    title: "How Often Should an Office Be Cleaned?",
+    href: "/how-often-should-office-be-cleaned",
+    copy: "Daily, weekly, and monthly cleaning frequency by office area and traffic level.",
+  },
+  {
+    title: "After-Hours Office Cleaning Access Plan",
+    href: "/after-hours-office-cleaning-access-plan",
+    copy: "Keys, alarms, parking, elevators, and contact rules to plan before giving building access.",
+  },
+  {
+    title: "Fix Inconsistent Office Cleaning",
+    href: "/fix-inconsistent-office-cleaning",
+    copy: "How to improve recurring cleaning without micromanaging the crew every week.",
+  },
 ]
 
 type LegalSlug = "privacy-policy" | "terms-of-service" | "cancellation-policy"
@@ -257,6 +286,7 @@ function App() {
           <nav className="hidden items-center gap-8 text-sm font-black text-slate-700 lg:flex">
             <a href="/#services" className="inline-flex min-h-11 items-center">Services</a>
             <a href="/#industries" className="inline-flex min-h-11 items-center">Industries</a>
+            <a href="/commercial-cleaning-guides" className="inline-flex min-h-11 items-center">Guides</a>
             <a href="/#service-areas" className="inline-flex min-h-11 items-center">Areas</a>
             <a href="/#quality" className="inline-flex min-h-11 items-center">Quality</a>
             <a href={QUOTE_URL} className="inline-flex min-h-11 items-center">Quote</a>
@@ -504,6 +534,32 @@ function App() {
       </section>
 
       <section className="bg-white px-5 py-20 sm:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.65fr_1fr]">
+          <div>
+            <p className="text-sm font-black uppercase text-[#075985]">Commercial cleaning guides</p>
+            <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Useful answers before you choose an office cleaning company.</h2>
+            <p className="mt-5 text-lg leading-8 text-slate-600">
+              These guides help office managers, property managers, and business owners prepare the scope, frequency, access plan, and quality-control expectations before a walkthrough.
+            </p>
+            <a href="/commercial-cleaning-guides" className="mt-7 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-5 py-3 text-sm font-black text-white transition hover:bg-[#16324d]">
+              View all guides <InlineArrow />
+            </a>
+          </div>
+          <div className="grid gap-4">
+            {homepageGuideLinks.map((guide) => (
+              <a key={guide.href} href={guide.href} className="group grid gap-2 border-t border-slate-300 pt-5">
+                <span className="flex items-center justify-between gap-4 text-xl font-black text-[#091a2a]">
+                  {guide.title}
+                  <LinkArrow />
+                </span>
+                <span className="leading-7 text-slate-600">{guide.copy}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-20 sm:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.95fr]">
           <div className="operations-photo min-h-[520px] rounded-lg" />
           <div className="flex flex-col justify-center">
@@ -596,6 +652,7 @@ function App() {
                 <li><a href="/medical-office-cleaning-services" className="inline-flex min-h-9 items-center">Medical offices</a></li>
                 <li><a href="/retail-store-cleaning-services" className="inline-flex min-h-9 items-center">Retail spaces</a></li>
                 <li><a href="/property-management-cleaning" className="inline-flex min-h-9 items-center">Managed properties</a></li>
+                <li><a href="/commercial-cleaning-guides" className="inline-flex min-h-9 items-center">Commercial cleaning guides</a></li>
                 <li><a href="/commercial-cleaning-checklist" className="inline-flex min-h-9 items-center">Quality control</a></li>
                 <li><a href="/#service-areas" className="inline-flex min-h-9 items-center">Service areas</a></li>
               </ul>

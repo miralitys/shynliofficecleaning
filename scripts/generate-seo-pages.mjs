@@ -4,10 +4,12 @@ import path from "node:path"
 const root = process.cwd()
 const distDir = path.join(root, "dist")
 const dataPath = path.join(root, "src/site/seo-routes.json")
+const articleGuidesPath = path.join(root, "src/site/article-guides.json")
 const siteUrl = "https://shynliofficecleaning.com"
 const quoteUrl = "https://shynlicleaningservice.com/quote"
 
 const data = JSON.parse(await fs.readFile(dataPath, "utf8"))
+const articleGuides = JSON.parse(await fs.readFile(articleGuidesPath, "utf8"))
 const shell = await fs.readFile(path.join(distDir, "index.html"), "utf8")
 
 const cityServices = data.services.filter((service) => service.cityEnabled)
@@ -119,6 +121,28 @@ function supportDescription(support) {
   return `${support.intent}, written for Chicago suburbs businesses comparing scope, schedule, and walkthrough-based service.`
 }
 
+function guideHubRoute() {
+  return {
+    kind: "guide-hub",
+    route: "commercial-cleaning-guides",
+    title: "Commercial Cleaning Guides for Chicago Suburbs Businesses",
+    description: "Practical commercial cleaning guides for Chicago suburbs offices, property managers, facility teams, and small business owners preparing for a walkthrough.",
+    bullets: ["Vendor selection", "Written scope and checklist planning", "Cleaning frequency, access, and consistency"],
+    articles: articleGuides,
+  }
+}
+
+function articleGuideRoutes() {
+  return articleGuides.map((article) => ({
+    kind: "article-guide",
+    route: article.route,
+    title: article.title,
+    description: article.metaDescription,
+    bullets: [article.targetQuestion, article.audience, "Walkthrough-first commercial cleaning guidance"],
+    article,
+  }))
+}
+
 function allRoutes() {
   const servicePages = data.services.map((service) => ({
     kind: "service",
@@ -215,7 +239,7 @@ function allRoutes() {
     },
   ]
 
-  return [...servicePages, ...industryPages, serviceAreasPage, ...cityPages, ...cityServicePages, ...cityIndustryPages, ...supportPages, ...legalPages]
+  return [...servicePages, ...industryPages, serviceAreasPage, ...cityPages, ...cityServicePages, ...cityIndustryPages, ...supportPages, guideHubRoute(), ...articleGuideRoutes(), ...legalPages]
 }
 
 function escapeHtml(value) {
@@ -268,7 +292,9 @@ function routeSchema(route) {
     name,
     addressRegion: "IL",
   }))
-  const faqEntities = route.kind === "legal" ? [] : routeFaqs(route)
+  const isArticle = route.kind === "article-guide"
+  const isGuideHub = route.kind === "guide-hub"
+  const faqEntities = route.kind === "legal" || isArticle || isGuideHub ? [] : routeFaqs(route)
   const graph = [
     {
       "@type": "ProfessionalService",
@@ -295,7 +321,7 @@ function routeSchema(route) {
       name: route.title,
       description: route.description,
       isPartOf: { "@id": websiteId },
-      about: { "@id": `${canonical}#service` },
+      about: { "@id": isArticle || isGuideHub ? businessId : `${canonical}#service` },
     },
     {
       "@type": "BreadcrumbList",
@@ -307,17 +333,58 @@ function routeSchema(route) {
           name: "Home",
           item: `${siteUrl}/`,
         },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: route.title,
-          item: canonical,
-        },
+        ...(isArticle
+          ? [
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Commercial Cleaning Guides",
+                item: `${siteUrl}/commercial-cleaning-guides`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: route.title,
+                item: canonical,
+              },
+            ]
+          : [
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: route.title,
+                item: canonical,
+              },
+            ]),
       ],
     },
   ]
 
-  if (route.kind !== "legal") {
+  if (isArticle) {
+    graph.push({
+      "@type": "Article",
+      "@id": `${canonical}#article`,
+      headline: route.title,
+      description: route.description,
+      mainEntityOfPage: { "@id": `${canonical}#webpage` },
+      author: { "@id": businessId },
+      publisher: { "@id": businessId },
+      dateModified: route.article.lastUpdated,
+      about: ["office cleaning", "commercial cleaning", "janitorial services"],
+    })
+  } else if (isGuideHub) {
+    graph.push({
+      "@type": "ItemList",
+      "@id": `${canonical}#guides`,
+      name: "Commercial Cleaning Guides",
+      itemListElement: route.articles.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: article.title,
+        url: `${siteUrl}/${article.route}`,
+      })),
+    })
+  } else if (route.kind !== "legal") {
     graph.push({
       "@type": "Service",
       "@id": `${canonical}#service`,
@@ -370,6 +437,7 @@ function staticHeader() {
     <nav class="hidden items-center gap-8 text-sm font-black text-slate-700 lg:flex">
       <a href="/#services" class="inline-flex min-h-11 items-center">Services</a>
       <a href="/#industries" class="inline-flex min-h-11 items-center">Industries</a>
+      <a href="/commercial-cleaning-guides" class="inline-flex min-h-11 items-center">Guides</a>
       <a href="/#service-areas" class="inline-flex min-h-11 items-center">Areas</a>
       <a href="/#quality" class="inline-flex min-h-11 items-center">Quality</a>
       <a href="${quoteUrl}" class="inline-flex min-h-11 items-center">Quote</a>
@@ -408,6 +476,7 @@ function staticFooter() {
           <li><a href="/medical-office-cleaning-services" class="inline-flex min-h-9 items-center">Medical offices</a></li>
           <li><a href="/retail-store-cleaning-services" class="inline-flex min-h-9 items-center">Retail spaces</a></li>
           <li><a href="/property-management-cleaning" class="inline-flex min-h-9 items-center">Managed properties</a></li>
+          <li><a href="/commercial-cleaning-guides" class="inline-flex min-h-9 items-center">Commercial cleaning guides</a></li>
           <li><a href="/commercial-cleaning-checklist" class="inline-flex min-h-9 items-center">Quality control</a></li>
           <li><a href="/#service-areas" class="inline-flex min-h-9 items-center">Service areas</a></li>
         </ul>
@@ -451,6 +520,8 @@ function staticDot() {
 
 function staticBody(route) {
   if (route.kind === "legal") return staticLegalBody(route)
+  if (route.kind === "guide-hub") return staticGuideHubBody(route)
+  if (route.kind === "article-guide") return staticArticleBody(route)
 
   const bullets = route.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")
   const related = data.services
@@ -514,6 +585,89 @@ function staticBody(route) {
 </main>`
 }
 
+function staticGuideHubBody(route) {
+  return `<main class="min-h-screen overflow-hidden bg-[#f6f9fc] text-[#091a2a]">
+  ${staticHeader()}
+  <section class="border-b border-slate-200 bg-white px-5 py-16 sm:px-8 lg:py-24">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.76fr_1fr] lg:items-end">
+      <div>
+        <span class="inline-flex min-h-7 items-center rounded-sm border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-black text-[#0a6f9f]">Commercial cleaning guides</span>
+        <h1 class="mt-5 max-w-4xl text-4xl font-black leading-tight sm:text-6xl">${escapeHtml(route.title)}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">${escapeHtml(route.description)}</p>
+      </div>
+      <div class="border-l-4 border-sky-300 bg-[#f6f9fc] p-6">
+        <p class="text-sm font-black uppercase text-[#075985]">Before the walkthrough</p>
+        <p class="mt-3 text-2xl font-black">Use these guides to prepare the scope, schedule, access plan, and quality-control questions before choosing a provider.</p>
+        <a href="${quoteUrl}" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-4 py-2 text-sm font-black text-white transition hover:bg-[#16324d]">Request a walkthrough <span aria-hidden="true" class="ml-2 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2"></span></a>
+      </div>
+    </div>
+  </section>
+  <section class="mx-auto grid max-w-7xl gap-6 px-5 py-16 sm:px-8 lg:grid-cols-2">
+    ${route.articles.map((article) => `<article class="border-t border-slate-300 pt-6">
+      <p class="text-sm font-black uppercase text-[#075985]">${escapeHtml(article.targetQuestion)}</p>
+      <h2 class="mt-3 text-2xl font-black leading-tight"><a href="/${article.route}">${escapeHtml(article.title)}</a></h2>
+      <p class="mt-4 leading-7 text-slate-600">${escapeHtml(article.excerpt)}</p>
+      <a href="/${article.route}" class="mt-5 inline-flex min-h-10 items-center text-sm font-black text-sky-700">Read guide <span aria-hidden="true" class="ml-2 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2"></span></a>
+    </article>`).join("")}
+  </section>
+  ${staticFooter()}
+</main>`
+}
+
+function staticArticleBody(route) {
+  const related = route.article.internalLinks
+    .filter((link) => link.startsWith(siteUrl))
+    .filter((link) => link !== route.article.canonicalUrl)
+    .slice(0, 6)
+    .map((link) => {
+      const label = link.replace(`${siteUrl}/`, "").replaceAll("-", " ")
+      return `<a href="${link}" class="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]"><span>${escapeHtml(label)}</span><span aria-hidden="true" class="ml-3 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-t-2 border-sky-500"></span></a>`
+    })
+    .join("")
+
+  return `<main class="min-h-screen overflow-hidden bg-[#f6f9fc] text-[#091a2a]">
+  ${staticHeader()}
+  <article class="bg-white px-5 py-16 sm:px-8 lg:py-24">
+    <div class="mx-auto max-w-4xl">
+      <nav class="text-sm font-black text-slate-500" aria-label="Breadcrumb">
+        <a href="/" class="text-sky-700">Home</a>
+        <span class="px-2">/</span>
+        <a href="/commercial-cleaning-guides" class="text-sky-700">Commercial Cleaning Guides</a>
+      </nav>
+      <p class="mt-8 text-sm font-black uppercase text-[#075985]">Commercial cleaning guide</p>
+      <h1 class="mt-3 text-4xl font-black leading-tight sm:text-6xl">${escapeHtml(route.title)}</h1>
+      <p class="mt-6 max-w-3xl text-xl leading-8 text-slate-600">${escapeHtml(route.article.targetQuestion)}</p>
+      <div class="mt-8 border-y border-slate-200 py-6 text-sm font-black text-slate-500">
+        <span>Last updated ${escapeHtml(route.article.lastUpdated)}</span>
+        <span class="px-3">/</span>
+        <span>${escapeHtml(route.article.audience)}</span>
+      </div>
+      <div class="mt-10">${route.article.bodyHtml}</div>
+    </div>
+  </article>
+  <section class="border-y border-slate-200 bg-[#f6f9fc] px-5 py-16 sm:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.7fr_1fr]">
+      <div>
+        <p class="text-sm font-black uppercase text-[#075985]">Related pages</p>
+        <h2 class="mt-3 text-3xl font-black leading-tight sm:text-5xl">Use the guide with the right service page.</h2>
+        <p class="mt-5 text-lg leading-8 text-slate-600">These links connect the article back to the walkthrough, scope, checklist, pricing, and service pages a business usually needs next.</p>
+      </div>
+      <nav class="grid gap-3 sm:grid-cols-2">${related}</nav>
+    </div>
+  </section>
+  <section class="bg-[#091a2a] px-5 py-16 text-white sm:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="text-sm font-black uppercase text-sky-300">Walkthrough quote</p>
+        <h2 class="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-5xl">Ready to turn this into a cleaning scope?</h2>
+      </div>
+      <a href="${quoteUrl}" class="inline-flex min-h-11 items-center justify-center rounded-sm bg-sky-300 px-6 py-3 text-sm font-black text-[#091a2a] transition hover:bg-sky-200">Request a walkthrough <span aria-hidden="true" class="ml-2 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2"></span></a>
+    </div>
+  </section>
+  ${staticFooter()}
+</main>`
+}
+
 function staticLegalBody(route) {
   const document = legalDocuments[route.route]
   const sections = (document?.sections || [])
@@ -548,11 +702,13 @@ function staticLegalBody(route) {
 function withMeta(route) {
   const canonical = `${siteUrl}/${route.route}`
   const schema = jsonLdSafe(routeSchema(route))
+  const pageTitle = route.kind === "article-guide" ? route.article.seoTitle : route.kind === "guide-hub" ? "Commercial Cleaning Guides | Shynli" : `${route.title} | ShynliOfficeCleaning.com`
+  const keywordsMeta = route.kind === "article-guide" ? `<meta name="keywords" content="${escapeHtml(route.article.keywords)}">\n` : ""
   let html = shell
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, "")
     .replace(/<link rel="modulepreload" crossorigin href="[^"]+">\n\s*/g, "")
     .replace(/<script type="module" crossorigin src="[^"]+"><\/script>\n\s*/g, "")
-    .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(route.title)} | ShynliOfficeCleaning.com</title>`)
+    .replace(/<title>.*?<\/title>/, `<title>${escapeHtml(pageTitle)}</title>`)
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/s, `<meta name="description" content="${escapeHtml(route.description)}">`)
     .replace(/<link rel="canonical" href=".*?"\s*\/?>/, `<link rel="canonical" href="${canonical}">`)
     .replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${staticBody(route)}</div>`)
@@ -561,7 +717,7 @@ function withMeta(route) {
     html = html.replace("</head>", `<link rel="canonical" href="${canonical}">\n</head>`)
   }
 
-  html = html.replace("</head>", `<script type="application/ld+json">${schema}</script>\n</head>`)
+  html = html.replace("</head>", `${keywordsMeta}<script type="application/ld+json">${schema}</script>\n</head>`)
 
   return html
 }
@@ -592,7 +748,7 @@ await fs.writeFile(
   `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`,
 )
 
-await fs.writeFile(
+  await fs.writeFile(
   path.join(distDir, "seo-page-manifest.json"),
   JSON.stringify(
     {
@@ -606,6 +762,8 @@ await fs.writeFile(
         cityServicePages: data.cities.length * cityServices.length,
         cityIndustryPages: data.cities.length * cityIndustries.length,
         supportPages: data.supportPages.length,
+        guideHubPages: 1,
+        articleGuidePages: articleGuides.length,
         legalPages: 3,
       },
       routes: routes.map((route) => ({

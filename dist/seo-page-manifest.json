@@ -1,14 +1,16 @@
 {
-  "generatedAt": "2026-05-23T17:26:00.960Z",
+  "generatedAt": "2026-06-05T22:10:38.581Z",
   "baseUrl": "https://shynliofficecleaning.com",
   "counts": {
-    "totalRoutes": 459,
+    "totalRoutes": 465,
     "servicePages": 12,
     "industryPages": 12,
     "cityPages": 42,
     "cityServicePages": 252,
     "cityIndustryPages": 126,
     "supportPages": 10,
+    "guideHubPages": 1,
+    "articleGuidePages": 5,
     "legalPages": 3
   },
   "routes": [
@@ -2741,6 +2743,42 @@
       "route": "office-cleaning-scope-template",
       "title": "Cleaning Scope Guide",
       "description": "how to define a clear office cleaning scope before recurring work begins, written for Chicago suburbs businesses comparing scope, schedule, and walkthrough-based service."
+    },
+    {
+      "kind": "guide-hub",
+      "route": "commercial-cleaning-guides",
+      "title": "Commercial Cleaning Guides for Chicago Suburbs Businesses",
+      "description": "Practical commercial cleaning guides for Chicago suburbs offices, property managers, facility teams, and small business owners preparing for a walkthrough."
+    },
+    {
+      "kind": "article-guide",
+      "route": "how-to-choose-office-cleaning-company",
+      "title": "How to Choose an Office Cleaning Company: 12 Questions to Ask Before a Walkthrough",
+      "description": "Ask these 12 questions before choosing an office cleaning company, comparing bids, or scheduling a walkthrough for your Chicago suburbs business."
+    },
+    {
+      "kind": "article-guide",
+      "route": "commercial-cleaning-scope-of-work-checklist",
+      "title": "Commercial Office Cleaning Checklist: What Should Be in a Written Scope of Work?",
+      "description": "See what belongs in a commercial office cleaning scope of work, from room-by-room tasks to frequency, exclusions, access rules, and reporting."
+    },
+    {
+      "kind": "article-guide",
+      "route": "how-often-should-office-be-cleaned",
+      "title": "How Often Should an Office Be Cleaned? Daily, Weekly, and Monthly Schedule by Area",
+      "description": "Compare daily, weekly, and monthly office cleaning schedules by area, traffic level, restrooms, break rooms, floors, and business hours."
+    },
+    {
+      "kind": "article-guide",
+      "route": "after-hours-office-cleaning-access-plan",
+      "title": "After-Hours Office Cleaning: What Businesses Should Plan Before Giving Building Access",
+      "description": "Plan after-hours office cleaning access with clear rules for keys, alarms, parking, locked areas, communication, lock-up steps, and scope."
+    },
+    {
+      "kind": "article-guide",
+      "route": "fix-inconsistent-office-cleaning",
+      "title": "Why Office Cleaning Gets Inconsistent and How to Fix It Without Micromanaging the Crew",
+      "description": "Learn why office cleaning becomes inconsistent and how to fix missed tasks with clearer scope, schedule, priorities, reporting, and quality checks."
     },
     {
       "kind": "legal",

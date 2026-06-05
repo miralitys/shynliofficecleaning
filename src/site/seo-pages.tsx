@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { ArrowRight } from "lucide-react"
 import seoData from "./seo-routes.json"
+import articleGuides from "./article-guides.json"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
@@ -8,6 +9,7 @@ type City = (typeof seoData.cities)[number]
 type Service = (typeof seoData.services)[number]
 type Industry = (typeof seoData.industries)[number]
 type SupportPage = (typeof seoData.supportPages)[number]
+type ArticleGuide = (typeof articleGuides)[number]
 
 export type SeoPage =
   | { kind: "service"; route: string; title: string; description: string; service: Service }
@@ -17,6 +19,8 @@ export type SeoPage =
   | { kind: "city-industry"; route: string; title: string; description: string; city: City; industry: Industry; nearby: City[] }
   | { kind: "service-areas"; route: string; title: string; description: string }
   | { kind: "support"; route: string; title: string; description: string; support: SupportPage }
+  | { kind: "guide-hub"; route: string; title: string; description: string; articles: ArticleGuide[] }
+  | { kind: "article-guide"; route: string; title: string; description: string; article: ArticleGuide }
 
 const cityServices = seoData.services.filter((service) => service.cityEnabled)
 const cityIndustries = seoData.industries.filter((industry) => industry.cityEnabled)
@@ -128,7 +132,23 @@ export function allSeoPages(): SeoPage[] {
     description: "Office cleaning, janitorial services, and commercial cleaning coverage across 42 Chicago suburbs service areas.",
   }
 
-  return [...servicePages, ...industryPages, serviceAreasPage, ...cityPages, ...cityServicePages, ...cityIndustryPages, ...supportPages]
+  const guideHubPage = {
+    kind: "guide-hub" as const,
+    route: "commercial-cleaning-guides",
+    title: "Commercial Cleaning Guides for Chicago Suburbs Businesses",
+    description: "Practical commercial cleaning guides for Chicago suburbs offices, property managers, facility teams, and small business owners preparing for a walkthrough.",
+    articles: articleGuides,
+  }
+
+  const articleGuidePages = articleGuides.map((article) => ({
+    kind: "article-guide" as const,
+    route: article.route,
+    title: article.title,
+    description: article.metaDescription,
+    article,
+  }))
+
+  return [...servicePages, ...industryPages, serviceAreasPage, ...cityPages, ...cityServicePages, ...cityIndustryPages, ...supportPages, guideHubPage, ...articleGuidePages]
 }
 
 export const seoStats = {
@@ -138,6 +158,7 @@ export const seoStats = {
   cityServices: seoData.cities.length * cityServices.length,
   cityIndustries: seoData.cities.length * cityIndustries.length,
   support: seoData.supportPages.length,
+  guidePages: articleGuides.length + 1,
   total: allSeoPages().length + 1 + 3,
 }
 
@@ -172,6 +193,8 @@ function pageBadge(page: SeoPage) {
   if (page.kind === "service") return "Commercial cleaning service"
   if (page.kind === "industry") return "Facility cleaning program"
   if (page.kind === "service-areas") return "Chicago suburbs service areas"
+  if (page.kind === "guide-hub") return "Commercial cleaning guides"
+  if (page.kind === "article-guide") return "Commercial cleaning guide"
   return "Commercial cleaning resource"
 }
 
@@ -230,6 +253,24 @@ function pageScope(page: SeoPage) {
     ]
   }
 
+  if (page.kind === "guide-hub") {
+    return [
+      "Commercial cleaning guides for businesses comparing providers, scopes, schedules, after-hours access, and recurring quality control.",
+      "Built for office managers, facility managers, property managers, and small business owners preparing for a walkthrough.",
+      "Each guide links back to service, checklist, quote, and scope pages so the content supports lead conversion instead of sitting alone.",
+      "Use this hub as the main internal link target from the homepage, footer, FAQ, and city templates.",
+    ]
+  }
+
+  if (page.kind === "article-guide") {
+    return [
+      page.article.excerpt,
+      page.article.targetQuestion,
+      `Written for ${page.article.audience}.`,
+      "Connect this guide to the walkthrough quote flow when a business is ready to define scope, schedule, access, and quality expectations.",
+    ]
+  }
+
   return [
     page.support.intent,
     "Practical guidance for office managers, property managers, and business owners comparing commercial cleaning options.",
@@ -268,6 +309,27 @@ function relatedLinks(page: SeoPage) {
         label: `${city.name} cleaning services`,
         href: `/${cityHubRoute(city)}`,
       })),
+    ]
+  }
+
+  if (page.kind === "guide-hub") {
+    return articleGuides.map((article) => ({
+      label: article.seoTitle.replace(" | Shynli", ""),
+      href: `/${article.route}`,
+    }))
+  }
+
+  if (page.kind === "article-guide") {
+    return [
+      { label: "Commercial Cleaning Guides", href: "/commercial-cleaning-guides" },
+      ...page.article.internalLinks
+        .filter((link) => link.startsWith("https://shynliofficecleaning.com/"))
+        .filter((link) => link !== page.article.canonicalUrl)
+        .slice(0, 7)
+        .map((link) => ({
+          label: link.replace("https://shynliofficecleaning.com/", "").replaceAll("-", " "),
+          href: link.replace("https://shynliofficecleaning.com", ""),
+        })),
     ]
   }
 
