@@ -141,6 +141,31 @@ const homepageGuideLinks = [
     href: "/fix-inconsistent-office-cleaning",
     copy: "How to improve recurring cleaning without micromanaging the crew every week.",
   },
+  {
+    title: "Should Office Employees Clean Bathrooms?",
+    href: "/should-office-employees-clean-bathrooms",
+    copy: "Where to draw the line between clean-as-you-go habits and scheduled office cleaning.",
+  },
+  {
+    title: "Office Restroom Cleaning Plan",
+    href: "/office-restroom-cleaning-plan",
+    copy: "Daily, weekly, and monthly restroom tasks, restocking, odor control, and touch points.",
+  },
+  {
+    title: "Day Porter vs Nightly Janitorial",
+    href: "/day-porter-vs-nightly-janitorial",
+    copy: "How to decide whether the building needs daytime support, after-hours cleaning, or both.",
+  },
+  {
+    title: "Office Cleaning Supplies and Restocking",
+    href: "/office-cleaning-supplies-restocking-plan",
+    copy: "Who provides products, paper goods, liners, soap, storage, and low-supply reporting.",
+  },
+  {
+    title: "Post-Construction Office Cleaning Plan",
+    href: "/post-construction-office-cleaning-plan",
+    copy: "How to plan dust, final touch-up cleaning, floor needs, and handover timing.",
+  },
 ]
 
 type LegalSlug = "privacy-policy" | "terms-of-service" | "cancellation-policy"
@@ -539,7 +564,7 @@ function App() {
             <p className="text-sm font-black uppercase text-[#075985]">Commercial cleaning guides</p>
             <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Useful answers before you choose an office cleaning company.</h2>
             <p className="mt-5 text-lg leading-8 text-slate-600">
-              These guides help office managers, property managers, and business owners prepare the scope, frequency, access plan, and quality-control expectations before a walkthrough.
+              These guides help office managers, property managers, and business owners prepare the scope, frequency, access plan, restroom plan, supply rules, and quality expectations before a walkthrough.
             </p>
             <a href="/commercial-cleaning-guides" className="mt-7 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-5 py-3 text-sm font-black text-white transition hover:bg-[#16324d]">
               View all guides <InlineArrow />

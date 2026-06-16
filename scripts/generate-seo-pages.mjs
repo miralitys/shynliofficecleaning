@@ -127,7 +127,7 @@ function guideHubRoute() {
     route: "commercial-cleaning-guides",
     title: "Commercial Cleaning Guides for Chicago Suburbs Businesses",
     description: "Practical commercial cleaning guides for Chicago suburbs offices, property managers, facility teams, and small business owners preparing for a walkthrough.",
-    bullets: ["Vendor selection", "Written scope and checklist planning", "Cleaning frequency, access, and consistency"],
+    bullets: ["Vendor selection and written scope", "Restroom, supply, and staffing boundaries", "Cleaning frequency, access, day porter, and project cleaning"],
     articles: articleGuides,
   }
 }
@@ -597,7 +597,7 @@ function staticGuideHubBody(route) {
       </div>
       <div class="border-l-4 border-sky-300 bg-[#f6f9fc] p-6">
         <p class="text-sm font-black uppercase text-[#075985]">Before the walkthrough</p>
-        <p class="mt-3 text-2xl font-black">Use these guides to prepare the scope, schedule, access plan, and quality-control questions before choosing a provider.</p>
+        <p class="mt-3 text-2xl font-black">Use these guides to prepare the scope, schedule, restroom plan, supplies, access rules, and quality-control questions before choosing a provider.</p>
         <a href="${quoteUrl}" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-4 py-2 text-sm font-black text-white transition hover:bg-[#16324d]">Request a walkthrough <span aria-hidden="true" class="ml-2 inline-block h-2.5 w-2.5 rotate-45 border-r-2 border-t-2"></span></a>
       </div>
     </div>

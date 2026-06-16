@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-05T22:10:38.581Z",
+  "generatedAt": "2026-06-16T15:29:55.935Z",
   "baseUrl": "https://shynliofficecleaning.com",
   "counts": {
-    "totalRoutes": 465,
+    "totalRoutes": 470,
     "servicePages": 12,
     "industryPages": 12,
     "cityPages": 42,
@@ -10,7 +10,7 @@
     "cityIndustryPages": 126,
     "supportPages": 10,
     "guideHubPages": 1,
-    "articleGuidePages": 5,
+    "articleGuidePages": 10,
     "legalPages": 3
   },
   "routes": [
@@ -2779,6 +2779,36 @@
       "route": "fix-inconsistent-office-cleaning",
       "title": "Why Office Cleaning Gets Inconsistent and How to Fix It Without Micromanaging the Crew",
       "description": "Learn why office cleaning becomes inconsistent and how to fix missed tasks with clearer scope, schedule, priorities, reporting, and quality checks."
+    },
+    {
+      "kind": "article-guide",
+      "route": "should-office-employees-clean-bathrooms",
+      "title": "Should Office Employees Clean Bathrooms and Shared Spaces?",
+      "description": "A practical guide for small businesses deciding what staff should tidy themselves and what belongs in a professional office cleaning scope."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-restroom-cleaning-plan",
+      "title": "Office Restroom Cleaning Plan: Daily, Weekly, and Monthly Tasks",
+      "description": "Plan office restroom cleaning by traffic level, daily tasks, restocking, odor control, high-touch surfaces, and periodic detail work."
+    },
+    {
+      "kind": "article-guide",
+      "route": "day-porter-vs-nightly-janitorial",
+      "title": "Day Porter vs Nightly Janitorial Service: Which Does Your Building Need?",
+      "description": "Compare day porter service and nightly janitorial cleaning for offices, medical spaces, retail stores, and managed properties."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-cleaning-supplies-restocking-plan",
+      "title": "Office Cleaning Supplies and Restocking: Who Provides What?",
+      "description": "Decide who provides cleaning products, paper goods, soap, liners, equipment, storage, and restocking notes before office cleaning starts."
+    },
+    {
+      "kind": "article-guide",
+      "route": "post-construction-office-cleaning-plan",
+      "title": "Post-Construction Office Cleaning: Plan Dust, Touch-Up, and Handover",
+      "description": "Plan post-construction office cleaning before employees, tenants, or customers return, including dust, touch-up cleaning, floors, and handover timing."
     },
     {
       "kind": "legal",
