@@ -255,10 +255,10 @@ function pageScope(page: SeoPage) {
 
   if (page.kind === "guide-hub") {
     return [
-      "Commercial cleaning guides for businesses comparing providers, scopes, schedules, restrooms, supplies, after-hours access, day porter support, and recurring quality control.",
+      "Commercial cleaning guides for businesses comparing providers, scopes, schedules, restrooms, break rooms, supplies, desk rules, floor care, odors, access, and recurring quality control.",
       "Built for office managers, facility managers, property managers, and small business owners preparing for a walkthrough.",
-      "Each guide links back to service, checklist, quote, and scope pages so the content supports lead conversion instead of sitting alone.",
-      "Use this hub as the main internal link target from the homepage, footer, FAQ, and city templates.",
+      "Use the guides to turn common office complaints into clear cleaning responsibilities before service starts.",
+      "The hub keeps practical answers in one place for teams that need a cleaner office without guessing what should be included.",
     ]
   }
 

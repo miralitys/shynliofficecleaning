@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-16T15:29:55.935Z",
+  "generatedAt": "2026-06-20T03:28:54.742Z",
   "baseUrl": "https://shynliofficecleaning.com",
   "counts": {
-    "totalRoutes": 470,
+    "totalRoutes": 475,
     "servicePages": 12,
     "industryPages": 12,
     "cityPages": 42,
@@ -10,7 +10,7 @@
     "cityIndustryPages": 126,
     "supportPages": 10,
     "guideHubPages": 1,
-    "articleGuidePages": 10,
+    "articleGuidePages": 15,
     "legalPages": 3
   },
   "routes": [
@@ -2809,6 +2809,36 @@
       "route": "post-construction-office-cleaning-plan",
       "title": "Post-Construction Office Cleaning: Plan Dust, Touch-Up, and Handover",
       "description": "Plan post-construction office cleaning before employees, tenants, or customers return, including dust, touch-up cleaning, floors, and handover timing."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-break-room-kitchen-cleaning-plan",
+      "title": "Office Break Room and Kitchen Cleaning Plan: Fridges, Microwaves, Dishes, and Odors",
+      "description": "Plan office break room and kitchen cleaning for fridges, microwaves, sinks, dishes, counters, trash, odors, and staff-vs-cleaner responsibilities."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-clean-desk-cleaning-policy",
+      "title": "Office Clean Desk Policy for Cleaning Crews, Personal Items, and Confidential Papers",
+      "description": "Create an office clean desk policy that tells cleaners what to clean, what to skip, and how to handle papers, personal items, desks, and privacy."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-floor-carpet-cleaning-plan",
+      "title": "Office Floor and Carpet Cleaning Plan: Vacuuming, Mats, Hard Floors, and Seasonal Soil",
+      "description": "Plan office floor and carpet cleaning by traffic level, entrance mats, vacuuming, hard floors, spot cleaning, winter salt, and periodic deep cleaning."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-odor-cleaning-plan",
+      "title": "Office Odor Cleaning Plan: Find the Source Instead of Masking the Smell",
+      "description": "Build an office odor cleaning plan for restrooms, trash, break rooms, carpets, drains, appliances, and fragrance-sensitive workplaces."
+    },
+    {
+      "kind": "article-guide",
+      "route": "switch-office-cleaning-companies",
+      "title": "How to Switch Office Cleaning Companies Without a Service Gap",
+      "description": "Switch office cleaning companies without missed trash, lost access, unclear scope, supply confusion, or a messy first month with the new provider."
     },
     {
       "kind": "legal",

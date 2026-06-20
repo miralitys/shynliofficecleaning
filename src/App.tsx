@@ -166,6 +166,31 @@ const homepageGuideLinks = [
     href: "/post-construction-office-cleaning-plan",
     copy: "How to plan dust, final touch-up cleaning, floor needs, and handover timing.",
   },
+  {
+    title: "Office Break Room and Kitchen Cleaning Plan",
+    href: "/office-break-room-kitchen-cleaning-plan",
+    copy: "How to handle fridges, microwaves, dishes, counters, trash, and food odors without guessing who owns what.",
+  },
+  {
+    title: "Office Clean Desk Cleaning Policy",
+    href: "/office-clean-desk-cleaning-policy",
+    copy: "What cleaners should wipe, skip, or report when desks have papers, personal items, and confidential work.",
+  },
+  {
+    title: "Office Floor and Carpet Cleaning Plan",
+    href: "/office-floor-carpet-cleaning-plan",
+    copy: "How to plan vacuuming, entrance mats, hard floors, carpet spots, winter salt, and periodic floor care.",
+  },
+  {
+    title: "Office Odor Cleaning Plan",
+    href: "/office-odor-cleaning-plan",
+    copy: "How to find odor sources in restrooms, break rooms, trash, floors, drains, and products instead of masking them.",
+  },
+  {
+    title: "Switch Office Cleaning Companies Without a Gap",
+    href: "/switch-office-cleaning-companies",
+    copy: "How to change vendors without missed service, access confusion, supply surprises, or a messy first month.",
+  },
 ]
 
 type LegalSlug = "privacy-policy" | "terms-of-service" | "cancellation-policy"
@@ -564,7 +589,7 @@ function App() {
             <p className="text-sm font-black uppercase text-[#075985]">Commercial cleaning guides</p>
             <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Useful answers before you choose an office cleaning company.</h2>
             <p className="mt-5 text-lg leading-8 text-slate-600">
-              These guides help office managers, property managers, and business owners prepare the scope, frequency, access plan, restroom plan, supply rules, and quality expectations before a walkthrough.
+              These guides help office managers, property managers, and business owners prepare the scope, schedule, access plan, shared-space rules, floor needs, odor concerns, and quality expectations before a walkthrough.
             </p>
             <a href="/commercial-cleaning-guides" className="mt-7 inline-flex min-h-11 items-center justify-center rounded-sm bg-[#091a2a] px-5 py-3 text-sm font-black text-white transition hover:bg-[#16324d]">
               View all guides <InlineArrow />
