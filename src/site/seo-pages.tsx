@@ -10,6 +10,7 @@ type Service = (typeof seoData.services)[number]
 type Industry = (typeof seoData.industries)[number]
 type SupportPage = (typeof seoData.supportPages)[number]
 type ArticleGuide = (typeof articleGuides)[number]
+type LinkItem = { label: string; href: string }
 
 export type SeoPage =
   | { kind: "service"; route: string; title: string; description: string; service: Service }
@@ -25,6 +26,7 @@ export type SeoPage =
 const cityServices = seoData.services.filter((service) => service.cityEnabled)
 const cityIndustries = seoData.industries.filter((industry) => industry.cityEnabled)
 const QUOTE_URL = "https://shynlicleaningservice.com/quote"
+const SITE_URL = "https://shynliofficecleaning.com"
 
 function StatusDot({ className = "" }: { className?: string }) {
   return (
@@ -65,6 +67,36 @@ function nearbyCities(city: City) {
 
 function supportDescription(support: SupportPage) {
   return `${support.intent}, written for Chicago suburbs businesses comparing scope, schedule, and walkthrough-based service.`
+}
+
+function canonicalForPage(page: SeoPage) {
+  return `${SITE_URL}/${page.route}`
+}
+
+function inboundGuideLinks(page: SeoPage, limit = 4): LinkItem[] {
+  if (page.kind === "article-guide" || page.kind === "guide-hub") return []
+
+  const canonical = canonicalForPage(page)
+  return articleGuides
+    .slice()
+    .reverse()
+    .filter((article) => article.inboundLinksFrom.includes(canonical))
+    .slice(0, limit)
+    .map((article) => ({
+      label: article.seoTitle.replace(" | Shynli", ""),
+      href: `/${article.route}`,
+    }))
+}
+
+function withInboundGuideLinks(page: SeoPage, links: LinkItem[], limit = 8) {
+  const seen = new Set<string>()
+  return [...inboundGuideLinks(page), ...links]
+    .filter((link) => {
+      if (seen.has(link.href)) return false
+      seen.add(link.href)
+      return true
+    })
+    .slice(0, limit)
 }
 
 export function allSeoPages(): SeoPage[] {
@@ -293,14 +325,14 @@ function facilityDetails(page: SeoPage) {
 }
 
 function relatedLinks(page: SeoPage) {
-  const base = [
+  const base: LinkItem[] = [
     { label: "Office Cleaning Services", href: "/office-cleaning-services" },
     { label: "Janitorial Services", href: "/janitorial-services" },
     { label: "Commercial Cleaning Checklist", href: "/commercial-cleaning-checklist" },
   ]
 
   if ("city" in page) {
-    return [
+    return withInboundGuideLinks(page, [
       ...cityServices.slice(0, 4).map((service) => ({
         label: `${service.name} in ${page.city.name}`,
         href: `/${cityServiceRoute(page.city, service)}`,
@@ -309,7 +341,7 @@ function relatedLinks(page: SeoPage) {
         label: `${city.name} cleaning services`,
         href: `/${cityHubRoute(city)}`,
       })),
-    ]
+    ])
   }
 
   if (page.kind === "guide-hub") {
@@ -334,20 +366,20 @@ function relatedLinks(page: SeoPage) {
   }
 
   if (page.kind === "service") {
-    return seoData.cities.slice(20, 28).map((city) => ({
+    return withInboundGuideLinks(page, seoData.cities.slice(20, 28).map((city) => ({
       label: `${page.service.name} in ${city.name}`,
       href: `/${cityServiceRoute(city, page.service)}`,
-    }))
+    })))
   }
 
   if (page.kind === "industry") {
-    return seoData.cities.slice(20, 28).map((city) => ({
+    return withInboundGuideLinks(page, seoData.cities.slice(20, 28).map((city) => ({
       label: `${page.industry.name} cleaning in ${city.name}`,
       href: `/${cityIndustryRoute(city, page.industry)}`,
-    }))
+    })))
   }
 
-  return base
+  return withInboundGuideLinks(page, base)
 }
 
 function faqItems(page: SeoPage) {
@@ -421,7 +453,7 @@ export function SeoLandingPage({ page }: { page: SeoPage }) {
       <section className="px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase text-[#075985]">Explore related cleaning options</p>
-          <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Choose the right service, city, or facility type.</h2>
+          <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Choose the right service, guide, city, or facility type.</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {links.map((link) => (
               <a key={link.href} href={link.href} className="flex min-h-16 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]">

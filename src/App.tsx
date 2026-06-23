@@ -122,9 +122,19 @@ const homepageGuideLinks = [
     copy: "Questions to ask before a walkthrough, from insurance and scope clarity to quality follow-up.",
   },
   {
+    title: "Office Cleaning Walkthrough Preparation Checklist",
+    href: "/office-cleaning-walkthrough-preparation-checklist",
+    copy: "What to gather before a walkthrough so the quote reflects rooms, traffic, access, and pain points.",
+  },
+  {
     title: "Commercial Office Cleaning Scope of Work Checklist",
     href: "/commercial-cleaning-scope-of-work-checklist",
     copy: "What should be written down before recurring office cleaning starts.",
+  },
+  {
+    title: "Office High-Touch Surface Cleaning Plan",
+    href: "/office-high-touch-surface-cleaning-plan",
+    copy: "Which shared surfaces need routine cleaning, when disinfection matters, and how to avoid vague promises.",
   },
   {
     title: "How Often Should an Office Be Cleaned?",
@@ -157,14 +167,29 @@ const homepageGuideLinks = [
     copy: "How to decide whether the building needs daytime support, after-hours cleaning, or both.",
   },
   {
+    title: "Office Conference Room Cleaning Checklist",
+    href: "/office-conference-room-cleaning-checklist",
+    copy: "How to reset meeting rooms, whiteboards, tables, chairs, AV areas, and food mess after heavy use.",
+  },
+  {
     title: "Office Cleaning Supplies and Restocking",
     href: "/office-cleaning-supplies-restocking-plan",
     copy: "Who provides products, paper goods, liners, soap, storage, and low-supply reporting.",
   },
   {
+    title: "Office Trash and Recycling Cleaning Plan",
+    href: "/office-trash-recycling-cleaning-plan",
+    copy: "How to set rules for desk trash, food waste, recycling bins, liners, overflow, and large disposal items.",
+  },
+  {
     title: "Post-Construction Office Cleaning Plan",
     href: "/post-construction-office-cleaning-plan",
     copy: "How to plan dust, final touch-up cleaning, floor needs, and handover timing.",
+  },
+  {
+    title: "Office Move-Out Cleaning Checklist",
+    href: "/office-move-out-cleaning-checklist",
+    copy: "What to clean after furniture, boxes, IT gear, and employees are out of a commercial office space.",
   },
   {
     title: "Office Break Room and Kitchen Cleaning Plan",

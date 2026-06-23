@@ -254,6 +254,36 @@ function jsonLdSafe(value) {
   return JSON.stringify(value).replaceAll("</script", "<\\/script")
 }
 
+function routeCanonical(route) {
+  return `${siteUrl}/${route.route}`
+}
+
+function inboundArticleLinks(route, limit = 4) {
+  if (route.kind === "article-guide" || route.kind === "guide-hub") return []
+
+  const canonical = routeCanonical(route)
+  return articleGuides
+    .slice()
+    .reverse()
+    .filter((article) => article.inboundLinksFrom.includes(canonical))
+    .slice(0, limit)
+    .map((article) => ({
+      label: article.seoTitle.replace(" | Shynli", ""),
+      href: `/${article.route}`,
+    }))
+}
+
+function dedupeLinkItems(items, limit = 8) {
+  const seen = new Set()
+  return items
+    .filter((item) => {
+      if (seen.has(item.href)) return false
+      seen.add(item.href)
+      return true
+    })
+    .slice(0, limit)
+}
+
 function cityNames(route) {
   if (route.city) {
     return [route.city.name, ...route.nearby.map((city) => city.name)]
@@ -524,9 +554,14 @@ function staticBody(route) {
   if (route.kind === "article-guide") return staticArticleBody(route)
 
   const bullets = route.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")
-  const related = data.services
-    .slice(0, 6)
-    .map((service) => `<a href="/${service.route}" class="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]"><span>${escapeHtml(service.name)}</span><span aria-hidden="true" class="ml-3 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-t-2 border-sky-500"></span></a>`)
+  const related = dedupeLinkItems([
+    ...inboundArticleLinks(route),
+    ...data.services.slice(0, 6).map((service) => ({
+      label: service.name,
+      href: `/${service.route}`,
+    })),
+  ])
+    .map((item) => `<a href="${item.href}" class="flex min-h-14 items-center justify-between border-t border-slate-300 pt-4 font-black text-[#091a2a]"><span>${escapeHtml(item.label)}</span><span aria-hidden="true" class="ml-3 h-2.5 w-2.5 shrink-0 rotate-45 border-r-2 border-t-2 border-sky-500"></span></a>`)
     .join("")
   return `<main class="min-h-screen overflow-hidden bg-[#f6f9fc] text-[#091a2a]">
   ${staticHeader()}
@@ -566,7 +601,7 @@ function staticBody(route) {
   <section class="px-5 py-16 sm:px-8">
     <div class="mx-auto max-w-7xl">
       <p class="text-sm font-black uppercase text-[#075985]">Explore related cleaning options</p>
-      <h2 class="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Choose the right service, city, or facility type.</h2>
+      <h2 class="mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-5xl">Choose the right service, guide, city, or facility type.</h2>
       <nav class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">${related}</nav>
     </div>
   </section>

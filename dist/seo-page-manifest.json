@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-20T03:28:54.742Z",
+  "generatedAt": "2026-06-23T15:42:05.509Z",
   "baseUrl": "https://shynliofficecleaning.com",
   "counts": {
-    "totalRoutes": 475,
+    "totalRoutes": 480,
     "servicePages": 12,
     "industryPages": 12,
     "cityPages": 42,
@@ -10,7 +10,7 @@
     "cityIndustryPages": 126,
     "supportPages": 10,
     "guideHubPages": 1,
-    "articleGuidePages": 15,
+    "articleGuidePages": 20,
     "legalPages": 3
   },
   "routes": [
@@ -2839,6 +2839,36 @@
       "route": "switch-office-cleaning-companies",
       "title": "How to Switch Office Cleaning Companies Without a Service Gap",
       "description": "Switch office cleaning companies without missed trash, lost access, unclear scope, supply confusion, or a messy first month with the new provider."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-cleaning-walkthrough-preparation-checklist",
+      "title": "Office Cleaning Walkthrough Preparation Checklist: What to Gather Before the Quote",
+      "description": "Prepare for an office cleaning walkthrough with the rooms, traffic, access rules, supplies, pain points, and schedule details a provider needs for a useful quote."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-high-touch-surface-cleaning-plan",
+      "title": "Office High-Touch Surface Cleaning Plan: Doors, Desks, Shared Equipment, and Seasonal Illness",
+      "description": "Build an office high-touch surface cleaning plan for door handles, desks, counters, shared equipment, restrooms, kitchens, meeting rooms, and seasonal illness needs."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-trash-recycling-cleaning-plan",
+      "title": "Office Trash and Recycling Cleaning Plan: Desks, Food Waste, Liners, and Overflow",
+      "description": "Create an office trash and recycling cleaning plan for desk bins, food waste, liners, recycling stations, cardboard, overflow, odors, and large disposal items."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-conference-room-cleaning-checklist",
+      "title": "Office Conference Room Cleaning Checklist: Tables, Chairs, Whiteboards, AV, and Food Mess",
+      "description": "Use this office conference room cleaning checklist for meeting tables, chairs, whiteboards, glass, trash, food mess, AV areas, floors, and after-event resets."
+    },
+    {
+      "kind": "article-guide",
+      "route": "office-move-out-cleaning-checklist",
+      "title": "Office Move-Out Cleaning Checklist: What to Clean Before a Commercial Lease Handoff",
+      "description": "Use this office move-out cleaning checklist for commercial lease handoff, furniture removal, trash, floors, restrooms, kitchens, dust, walls, and final walkthrough prep."
     },
     {
       "kind": "legal",
