@@ -94,6 +94,141 @@ const cityLongform = {
       ],
     },
   ],
+
+  "geneva-il": [
+    {
+      heading: "Storefronts cannot close for cleaning, so the schedule works around the door",
+      paragraphs: [
+        "Retail and street-level space has a constraint an office does not: the business cannot pause. Cleaning has to land in the gap between the last customer and the first one, which in practice means late evening or early morning, and it means the crew has to be genuinely finished, not almost finished, when the door unlocks.",
+        "Our crews are based in Naperville, roughly twenty five minutes from Geneva. Being close is what makes a 6 a.m. start or an 8 p.m. finish workable rather than something a vendor agrees to and then quietly renegotiates after a month.",
+      ],
+    },
+    {
+      heading: "Older buildings change the job more than people expect",
+      paragraphs: [
+        "Downtown Geneva has a lot of buildings that were not designed around modern cleaning equipment, and that shows up in the quote. It is worth naming during the walkthrough rather than discovering later.",
+      ],
+      bullets: [
+        "Wood and original tile floors need different products and gentler equipment than commercial vinyl. The wrong machine takes finish off in one pass.",
+        "Older restrooms often have fixtures and grout that will never look new. Honest expectations up front beat a monthly complaint.",
+        "Narrow stairs and no freight elevator mean equipment has to be carried, which changes what is realistic on an upper floor.",
+        "Radiators, sills, and trim collect dust in ways flat modern surfaces do not, and they are usually missing from a generic checklist.",
+        "Back-of-house space in retail is often tighter and messier than the sales floor, and it eats time nobody quoted for.",
+      ],
+    },
+    {
+      heading: "Glass and entrances carry more weight in retail than anywhere else",
+      paragraphs: [
+        "For an office, smudged glass is a minor annoyance. For a storefront it is the first thing a customer sees, and it gets dirty every single day regardless of foot traffic. Weather, hands, and street dust do it.",
+        "This is usually where a generic office contract fails retail: interior glass appears once a week, exterior is somebody else's problem, and the entrance mat is not mentioned at all. If the front matters to you, it should be named as its own line in the scope with its own frequency, not folded into general cleaning.",
+      ],
+    },
+    {
+      heading: "Multi-tenant buildings need the boundary drawn in writing",
+      paragraphs: [
+        "A lot of Geneva commercial space is a shop downstairs with offices above, sharing an entrance, a stairwell, and often a restroom. That works fine until nobody has written down who is responsible for the shared parts.",
+        "Before service starts, settle it plainly: does the scope stop at your door or include the common hallway; who cleans the shared restroom and how often; who supplies consumables there; and what happens when the landlord and a tenant have different expectations. We will ask these at the walkthrough, and you should ask them of any vendor.",
+      ],
+    },
+    {
+      heading: "Geneva specifics",
+      paragraphs: [
+        "Geneva is the Kane County seat, sitting on the Fox River between St. Charles and Batavia, with Elburn and Aurora close by. The commercial character here is different from a suburban office park: more street-level frontage, more mixed-use, more buildings with history and quirks, and more businesses where the customer walks in rather than emails.",
+        "There is no minimum size and no minimum contract. A single storefront and a shared building both get the same walkthrough, and the scope is written to what is actually in the space rather than to a package.",
+      ],
+    },
+  ],
+
+  "wheaton-il": [
+    {
+      heading: "Medical and dental offices need a different scope, not a bigger one",
+      paragraphs: [
+        "A clinic is not an office with extra rooms. The cleaning has different priorities, different sequencing, and a much clearer line about what is and is not the cleaner's job. Treating it as a standard office contract with more square footage is how vendors and practices end up unhappy with each other.",
+        "Our crews are based in Naperville, about twenty minutes from Wheaton, which matters here because clinics usually want cleaning after the last patient leaves rather than overnight, and that is a narrower window than an office gives you.",
+      ],
+    },
+    {
+      heading: "What a cleaning company should not touch, and why saying so is a good sign",
+      paragraphs: [
+        "This is the part worth reading carefully, and worth asking about wherever you get your quote. A commercial cleaning crew is not a medical waste contractor, and any vendor who is vague about the boundary should worry you.",
+      ],
+      bullets: [
+        "Sharps containers: not emptied, not moved, not handled. Replacement and disposal go through your regulated waste vendor.",
+        "Red bag and regulated medical waste: not collected with general trash, ever, and not consolidated by the cleaning crew.",
+        "Spills of blood or bodily fluids: handled by trained staff under your own exposure control plan, not by a nightly cleaner who happened to find it.",
+        "Clinical equipment and instrument surfaces: wiped by your staff per your protocols, not by us.",
+        "Anything in a treatment room that is not a floor, a general surface, or a trash receptacle should be named explicitly before it is assumed.",
+      ],
+      // Осознанная позиция: честная граница ответственности это и есть
+      // главный сигнал компетентности для медицинской клиники. Она же
+      // защищает нас: никаких обещаний про инфекционный контроль.
+    },
+    {
+      heading: "Waiting rooms and high-touch surfaces do the real work",
+      paragraphs: [
+        "Patients judge a practice on the waiting room, the restroom, and whatever they touch on the way in. Those are also the surfaces that get contaminated fastest and the ones a generic checklist covers most vaguely.",
+        "A useful scope names them individually: door handles and push plates, check-in counter, pens and clipboards area, chair arms in the waiting room, restroom fixtures and dispensers, light switches, and the elevator or stairwell rail if you have one. Frequency on these should be higher than on desks and floors, and it should be written that way rather than implied.",
+      ],
+    },
+    {
+      heading: "Consistency and documentation matter more in a regulated space",
+      paragraphs: [
+        "In a normal office, a missed week is a nuisance. In a practice, it becomes a question during an inspection or an unhappy note in a patient review. That raises the bar on the boring parts of a cleaning contract.",
+        "Worth agreeing before service starts: whether the same crew is assigned to the building rather than rotating; whether visits are logged in a way you can check; how a missed item gets reported and corrected; and who your after-hours contact is when something is found wrong at 7 a.m. before patients arrive. None of this is exotic, but a vendor who has answers ready has done it before.",
+      ],
+    },
+    {
+      heading: "Wheaton specifics",
+      paragraphs: [
+        "Wheaton is the DuPage County seat, which shapes what kind of commercial space is here: a heavy concentration of professional practices, legal and financial offices, medical and dental suites, and administrative buildings rather than warehouses. Glen Ellyn, Winfield, Carol Stream, and Warrenville are all next door.",
+        "There is no minimum size and no minimum contract. A two-operatory dental office and a full medical suite both get the same walkthrough, and the scope is written to what is in the space, including a written line on what we do not touch.",
+      ],
+    },
+  ],
+
+  "batavia-il": [
+    {
+      heading: "Floor care is a separate discipline, not part of the nightly clean",
+      paragraphs: [
+        "The single most common misunderstanding in commercial cleaning is assuming floors are handled by the recurring visit. Sweeping and mopping are. Everything that makes a floor actually look maintained is not.",
+        "Stripping and refinishing, burnishing, carpet extraction, concrete sealing, and grout work are periodic projects with their own equipment, their own drying time, and their own line in the budget. A nightly crew has neither the hours nor the machines for it. When a building looks tired despite regular cleaning, this is almost always why.",
+      ],
+    },
+    {
+      heading: "Concrete, epoxy, and VCT each want something different",
+      paragraphs: [
+        "Batavia has a lot of light industrial and mixed commercial space, which means floors are rarely all one material. Getting this wrong is expensive, because the damage shows up slowly and is not reversible with more cleaning.",
+      ],
+      bullets: [
+        "Sealed concrete: needs neutral cleaner and regular dust control. Aggressive degreasers strip the sealer, and then the slab starts absorbing everything.",
+        "Epoxy coating: durable but scratches. Grit left on the surface acts like sandpaper under every cart and pallet jack, so sweeping frequency matters more than mopping.",
+        "VCT tile: the classic office floor. Needs finish, and needs burnishing between full strip-and-recoat cycles or it dulls fast.",
+        "Carpet in traffic lanes: vacuuming maintains it, extraction restores it. Skipping extraction for years does not save money, it shortens the carpet's life.",
+        "Mat systems at entrances: unglamorous and the highest-return thing in floor care. Most of what damages an interior floor walks in on shoes.",
+      ],
+    },
+    {
+      heading: "Break rooms and shift changes are where facilities actually get complaints",
+      paragraphs: [
+        "In a building that runs shifts, the break room takes more abuse than any office kitchen and gets used again within hours of being cleaned. Timing the visit badly means it is dirty for most of the people who use it.",
+        "Worth settling at the walkthrough: when the room is actually empty, whether cleaning should land between shifts rather than after the last one, who is responsible for the inside of the refrigerator and how often, and whether trash volume needs more frequent removal than the rest of the building. These are small decisions that decide whether staff think the cleaning is working.",
+      ],
+    },
+    {
+      heading: "Why floor care is quoted separately, and how to plan for it",
+      paragraphs: [
+        "Bundling floor work into a flat monthly rate sounds simpler and usually costs more, because the vendor has to price for the worst case. Quoting it separately lets you set the interval against how the floor actually wears.",
+        "A workable approach: recurring janitorial on a fixed schedule, then floor projects on an interval matched to traffic, typically more often at entrances and in production areas than in private offices. Ask any vendor to show you the interval they recommend and the reasoning, not just the price.",
+      ],
+    },
+    {
+      heading: "Batavia specifics",
+      paragraphs: [
+        "Batavia sits on the Fox River in Kane County between Geneva and North Aurora, with Aurora and Warrenville close by. It carries more manufacturing and light industrial history than its neighbors, and the commercial space reflects that: more mixed flooring, more high-bay and warehouse areas alongside offices, and more buildings where the cleaning plan has to handle two very different environments under one roof.",
+        "There is no minimum size and no minimum contract. An office suite and a mixed office-and-warehouse building both get the same walkthrough, and floor care is quoted as its own line rather than buried in a monthly number.",
+      ],
+    },
+  ],
 }
 
 const data = JSON.parse(await fs.readFile(dataPath, "utf8"))
