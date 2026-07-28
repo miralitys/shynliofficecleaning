@@ -13,6 +13,89 @@ const googleRating = "5.0"
 const googleReviewCount = "44"
 const googleReviewsUrl = "https://www.google.com/maps/place/?q=place_id:ChIJw5zPGN2Y-GMRTHBrFh1rKYE"
 
+/*
+ * Развёрнутый текст городских страниц. Ключ это slug города.
+ *
+ * ЗАЧЕМ: по умолчанию городская страница это ~357 слов, где уникальны
+ * только название города и округа. Всё остальное слово в слово совпадает
+ * на всех 479 страницах. Google такие страницы показывает (у sugar-grove
+ * 3 316 показов за 3 месяца), но держит на 31-й позиции, поэтому кликов
+ * ноль.
+ *
+ * ПРАВИЛО НАПОЛНЕНИЯ: писать только то, что правда. Клиентов в этих
+ * городах пока нет, кейсов нет, поэтому глубина берётся из реальной
+ * экспертизы по коммерческой уборке (как считается смета, как устроен
+ * ночной доступ, чем janitorial отличается от day porter), а город
+ * остаётся рамкой. Выдуманные кейсы и цифры не добавлять: ровно за это
+ * Google отклонил 108 шаблонных страниц на соседнем сайте сети.
+ *
+ * Начато с одного города как проверка гипотезы. Если через месяц позиция
+ * sugar-grove сдвинется, повторить на geneva, wheaton, batavia, yorkville.
+ */
+const cityLongform = {
+  "sugar-grove-il": [
+    {
+      heading: "Crews run out of Naperville, so evenings and weekends are realistic",
+      paragraphs: [
+        "Our crews are based in Naperville, which puts Sugar Grove about a twenty minute drive west along the I-88 and Route 47 corridor. That distance matters more than it sounds. A cleaning company two counties away has to build travel into every quote and tends to push everyone toward the same convenient time slot. Being close means the schedule can be built around your building instead of around our drive.",
+        "Evening, early morning, and weekend cleaning are all on the table. Most offices prefer the crew to arrive after the last person leaves, so the work happens with nobody at their desk and the space is ready before the first arrival the next morning. Retail and clinics often want the opposite: an early start before doors open. Both are workable, and the walkthrough is where we settle which one fits your building.",
+      ],
+    },
+    {
+      heading: "How a commercial cleaning quote is actually built",
+      paragraphs: [
+        "Commercial cleaning is not priced from a menu, and any company that gives you a number over the phone is guessing. The quote comes out of a walkthrough, because the same square footage behaves completely differently depending on what is inside it.",
+        "These are the things that genuinely move the price:",
+      ],
+      bullets: [
+        "Restroom count, far more than total square footage. Restrooms are the slowest rooms in any building and the first thing people judge.",
+        "Traffic. A quiet back office and a clinic waiting room of the same size are not the same job.",
+        "Floor types. Carpet, vinyl, sealed concrete, and hard tile each need different equipment and different intervals.",
+        "Frequency. Five nights a week costs more per month but usually less per visit, because soil never gets a chance to build up.",
+        "Access. Alarm codes, key handling, badge systems, elevator rules, and dock hours all add time before anyone starts cleaning.",
+        "Room mix. Conference rooms, break rooms, and kitchens take disproportionate time compared to open desk areas.",
+      ],
+    },
+    {
+      heading: "After-hours access, the part most vendors gloss over",
+      paragraphs: [
+        "If cleaning happens after hours, someone is in your building when nobody else is. That deserves a clearer conversation than it usually gets, and it is worth raising with any vendor you consider, not only with us.",
+        "The questions worth settling before the first visit: who physically holds the keys or fobs and how many exist; who has the alarm code and what happens if it is entered wrong; who is responsible for locking up and confirming it; whether the crew signs in and out somewhere you can check; and what the process is when something is found broken, left unlocked, or already damaged on arrival.",
+        "None of this is exotic, but writing it down before service starts is what keeps a small misunderstanding from becoming an argument three months in.",
+      ],
+    },
+    {
+      heading: "Janitorial, day porter, and deep cleaning are three different things",
+      paragraphs: [
+        "These terms get used interchangeably in sales conversations, and the difference decides whether a contract fits your building.",
+        "Routine janitorial is the recurring visit: trash, restrooms, floors, high-touch surfaces, done on a fixed schedule when the building is empty. Day porter is a person present during business hours, handling restrooms, spills, entrances, and break rooms as the day happens. It is what buildings with heavy foot traffic need, and no amount of overnight cleaning substitutes for it. Deep cleaning is periodic and heavier: floor stripping and refinishing, carpet extraction, interior glass, vents, and the detail work that a nightly visit never has time for.",
+        "Most facilities need routine janitorial plus deep cleaning on an interval. A minority genuinely need a day porter. Knowing which one you are saves money in both directions.",
+      ],
+    },
+    {
+      heading: "What to ask any commercial cleaning vendor before signing",
+      paragraphs: [
+        "Worth asking us, and worth asking whoever else you are talking to:",
+      ],
+      bullets: [
+        "Is the scope written down room by room, or described in general terms?",
+        "What happens when something on the checklist is missed, and how do you report it?",
+        "Is the same crew assigned to the building, or does it rotate?",
+        "Who is the point of contact after hours, and how fast do they answer?",
+        "Are supplies and consumables included, or billed separately?",
+        "How is the contract ended, and with how much notice?",
+      ],
+    },
+    {
+      heading: "Sugar Grove specifics",
+      paragraphs: [
+        "Sugar Grove sits in Kane County along the Route 47 corridor, with quick access to I-88 and immediate neighbors in Aurora, North Aurora, Elburn, Batavia, and Yorkville. The commercial mix here leans toward smaller professional offices, clinics, and light industrial space rather than high-rise towers, which usually means fewer restrooms, more mixed flooring, and schedules built around a single tenant rather than a building manager.",
+        "There is no minimum facility size and no minimum contract. A two-room office and a multi-tenant building both get the same walkthrough, and the scope is written to match what is actually there. If the honest answer after the walkthrough is that you need less than you thought, that is what the quote will say.",
+      ],
+    },
+  ],
+}
+
 const data = JSON.parse(await fs.readFile(dataPath, "utf8"))
 const articleGuides = JSON.parse(await fs.readFile(articleGuidesPath, "utf8"))
 const shell = await fs.readFile(path.join(distDir, "index.html"), "utf8")
@@ -560,6 +643,30 @@ function staticBody(route) {
   if (route.kind === "article-guide") return staticArticleBody(route)
 
   const bullets = route.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")
+  const cityLongformHtml = (currentRoute) => {
+    if (currentRoute.kind !== "city") return ""
+    const blocks = cityLongform[currentRoute.city?.slug]
+    if (!blocks) return ""
+    const sections = blocks
+      .map((block) => {
+        const paragraphs = (block.paragraphs || [])
+          .map((text) => `<p class="mt-5 text-lg leading-8 text-slate-600">${escapeHtml(text)}</p>`)
+          .join("")
+        const list = block.bullets
+          ? `<ul class="mt-6 grid gap-4">${block.bullets
+              .map(
+                (item) =>
+                  `<li class="grid grid-cols-[1.5rem_1fr] gap-3 border-b border-slate-200 pb-4">${staticDot()}<span class="leading-7 text-slate-600">${escapeHtml(item)}</span></li>`,
+              )
+              .join("")}</ul>`
+          : ""
+        return `<article class="mt-14 first:mt-0"><h2 class="text-3xl font-black leading-tight sm:text-4xl">${escapeHtml(block.heading)}</h2>${paragraphs}${list}</article>`
+      })
+      .join("")
+    return `<section class="px-5 py-16 sm:px-8">
+    <div class="mx-auto max-w-4xl">${sections}</div>
+  </section>`
+  }
   const related = dedupeLinkItems([
     ...inboundArticleLinks(route),
     ...data.services.slice(0, 6).map((service) => ({
@@ -604,6 +711,7 @@ function staticBody(route) {
       </div>
     </div>
   </section>
+  ${cityLongformHtml(route)}
   <section class="px-5 py-16 sm:px-8">
     <div class="mx-auto max-w-7xl">
       <p class="text-sm font-black uppercase text-[#075985]">Explore related cleaning options</p>
