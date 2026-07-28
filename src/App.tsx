@@ -2,6 +2,14 @@ import { useEffect, useState, type ComponentType } from "react"
 
 const QUOTE_URL = "https://shynlicleaningservice.com/quote"
 const SITE_NAME = "ShynliOfficeCleaning.com"
+
+/**
+ * Профиль Google. Число отзывов растёт, сверять время от времени.
+ * Тот же профиль, что на остальных сайтах сети.
+ */
+const GOOGLE_RATING = "5.0"
+const GOOGLE_REVIEW_COUNT = "44"
+const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/place/?q=place_id:ChIJw5zPGN2Y-GMRTHBrFh1rKYE"
 type SeoRouteComponent = ComponentType<{ pathname: string }>
 
 const trustSignals = [
@@ -749,6 +757,16 @@ function App() {
                 <li><a href="tel:+16308127077" className="inline-flex min-h-9 items-center">(630) 812-7077</a></li>
                 <li>Chicago suburbs</li>
                 <li><a href={QUOTE_URL} className="inline-flex min-h-9 items-center">Request walkthrough</a></li>
+                <li>
+                  <a
+                    href={GOOGLE_REVIEWS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-9 items-center"
+                  >
+                    {GOOGLE_RATING} from {GOOGLE_REVIEW_COUNT} Google reviews
+                  </a>
+                </li>
                 <li>After-hours schedules</li>
                 <li>Commercial quote required</li>
               </ul>

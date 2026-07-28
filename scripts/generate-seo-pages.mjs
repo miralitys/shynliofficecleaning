@@ -8,6 +8,11 @@ const articleGuidesPath = path.join(root, "src/site/article-guides.json")
 const siteUrl = "https://shynliofficecleaning.com"
 const quoteUrl = "https://shynlicleaningservice.com/quote"
 
+/** Профиль Google, тот же, что на остальных сайтах сети. Число отзывов растёт, сверять. */
+const googleRating = "5.0"
+const googleReviewCount = "44"
+const googleReviewsUrl = "https://www.google.com/maps/place/?q=place_id:ChIJw5zPGN2Y-GMRTHBrFh1rKYE"
+
 const data = JSON.parse(await fs.readFile(dataPath, "utf8"))
 const articleGuides = JSON.parse(await fs.readFile(articleGuidesPath, "utf8"))
 const shell = await fs.readFile(path.join(distDir, "index.html"), "utf8")
@@ -526,6 +531,7 @@ function staticFooter() {
           <li><a href="tel:+16308127077" class="inline-flex min-h-9 items-center">(630) 812-7077</a></li>
           <li>Chicago suburbs</li>
           <li><a href="${quoteUrl}" class="inline-flex min-h-9 items-center">Request walkthrough</a></li>
+          <li><a href="${googleReviewsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-9 items-center">${googleRating} from ${googleReviewCount} Google reviews</a></li>
           <li>After-hours schedules</li>
           <li>Commercial quote required</li>
         </ul>
