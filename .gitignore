@@ -4,3 +4,6 @@ node_modules
 
 # Migration verification artifacts
 reports/
+
+# Empty Render publication directory for onrender redirects
+redirect-origin/

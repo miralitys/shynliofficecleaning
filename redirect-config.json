@@ -9,5 +9,20 @@
   "deployment": "Move only web custom-domain bindings to the existing Node service. Keep DNS unchanged.",
   "rollbackBuildCommand": "npm ci && npm run build",
   "rollbackPublishDirectory": "dist",
-  "rollbackSourceCommit": "35932a267aef8e20cca40ce1b08ceb0c85941424"
+  "rollbackSourceCommit": "35932a267aef8e20cca40ce1b08ceb0c85941424",
+  "onrenderRedirect": {
+    "version": "2026-10-23.2",
+    "hostname": "shynliofficecleaning.onrender.com",
+    "buildCommand": "node scripts/prepare-onrender-redirect.mjs",
+    "publishDirectory": "redirect-origin",
+    "route": {
+      "type": "rewrite",
+      "source": "/*",
+      "destination": "https://shynlicom.onrender.com/__office_redirect/*"
+    },
+    "rollbackCommit": "18deddcbbdadb0473773a06aaaae8082fc06cb0e",
+    "rollbackBuildCommand": "npm ci && npm run build",
+    "rollbackPublishDirectory": "dist",
+    "rollback": "Restore the previous Render routing rules, build command and dist publication path. The original website files are retained unchanged."
+  }
 }

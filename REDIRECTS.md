@@ -24,3 +24,20 @@ Remove the office apex/www bindings from the shared Node service and reattach th
 Pre-migration source revision: `35932a267aef8e20cca40ce1b08ceb0c85941424`.
 
 OFFICE_REDIRECT_ENABLED=false disables this handler; restoring old content requires the Static Site domain bindings. Cached redirects may persist for the one-hour cache lifetime. Other migrated domains have independent handlers.
+
+Onrender migration configuration version `2026-10-23.2`
+
+`https://shynliofficecleaning.onrender.com` now uses the same mapping as its public domain.
+Render publishes the empty `redirect-origin` directory, built with
+`node scripts/prepare-onrender-redirect.mjs`. Its `/*` rule internally rewrites
+to `https://shynlicom.onrender.com/__office_redirect/*`. The existing Node handler returns a server-side
+301 directly to the final main-site URL. The internal rewrite adds no client
+redirect hop. Query parameters are preserved by Render and the Node handler.
+The mapping code remains version `2026-10-23.1` and is unchanged.
+
+Original `src/`, `public/` and committed `dist/` files are unchanged. Previous
+source revision: `18deddcbbdadb0473773a06aaaae8082fc06cb0e`. To restore this Static Site, remove the external
+rewrite, restore its prior route rules, set Publish Directory to `dist`, restore
+Build Command to `npm ci && npm run build`, and deploy the retained
+revision. Its retained noindex header can be removed when restoring public
+content. DNS, custom-domain bindings and the main website are unchanged.
