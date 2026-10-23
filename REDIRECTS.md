@@ -28,11 +28,12 @@ OFFICE_REDIRECT_ENABLED=false disables this handler; restoring old content requi
 Onrender migration configuration version `2026-10-23.2`
 
 `https://shynliofficecleaning.onrender.com` now uses the same mapping as its public domain.
-Render publishes the empty `redirect-origin` directory, built with
+Render publishes the `redirect-origin` directory with a deployment marker only, built with
 `node scripts/prepare-onrender-redirect.mjs`. Its `/*` rule internally rewrites
 to `https://shynlicom.onrender.com/__office_redirect/*`. The existing Node handler returns a server-side
 301 directly to the final main-site URL. The internal rewrite adds no client
-redirect hop. Query parameters are preserved by Render and the Node handler.
+redirect hop. The sole new diagnostic file `/__shynli_redirect_version.txt`
+answers 200 with noindex; all former website paths use the redirect handler. Query parameters are preserved by Render and the Node handler.
 The mapping code remains version `2026-10-23.1` and is unchanged.
 
 Original `src/`, `public/` and committed `dist/` files are unchanged. Previous
