@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/generate-seo-pages.mjs && node scripts/optimize-css-loading.mjs && node scripts/static-render-homepage.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:redirects": "node --test tests/redirects.test.mjs",
+    "audit:redirects": "node scripts/audit-redirects.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",

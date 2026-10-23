@@ -1,0 +1,13 @@
+{
+  "version": "2026-10-23.1",
+  "sourceService": "srv-d80vhc9j2pic73bibvg0",
+  "originService": "srv-d80u9tnlk1mc739ucneg",
+  "customDomains": [
+    "shynliofficecleaning.com",
+    "www.shynliofficecleaning.com"
+  ],
+  "deployment": "Move only web custom-domain bindings to the existing Node service. Keep DNS unchanged.",
+  "rollbackBuildCommand": "npm ci && npm run build",
+  "rollbackPublishDirectory": "dist",
+  "rollbackSourceCommit": "35932a267aef8e20cca40ce1b08ceb0c85941424"
+}
